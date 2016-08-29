@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>系统登录</title>
+	<link rel="stylesheet" href="css/index.css"/>
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/jquery.autocomplete.js" ></script>
+	<script type="text/javascript" src="js/YMLib.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$("#name").focus();
+		autoCompletelogin();
+		//var left = parseInt($(".ac_results").css("left"))+46;
+		//$(".ac_results").css("left",left+"px");
+		//console.log($(".ac_results").css("left"));
+		//console.log($(".ac_results"));
+		//$(".ac_results").css({"color":"red","background-color":"black"});
+	});
+	function autoCompletelogin(){
+	$("#name").autocomplete("/zhglpt/xtgl/userlogin.do", {
+		multiple : false,
+		minChars :2,
+		multipleSeparator : ' ',
+		mustMatch: true,
+  		cacheLength : 0,
+  		delay : 0,
+  		max : 50,
+  		extraParams : {
+				name:function() {
+  				var d = $("#name").val();
+  				return d;
+  			}
+  		},
+  		dataType : 'json',// 返回类型
+  		// 对返回的json对象进行解析函数，函数返回一个数组
+  		parse : function(data) {
+  			var aa = [];
+  			aa = $.map(eval(data), function(row) {
+  					return {
+  						data : row,
+  						value : row.truename.replace(/(\s*$)/g,""),
+  						result : row.truename.replace(/(\s*$)/g,"")
+  					};
+  				});
+  			return aa;
+  		},formatItem : function(row, i, max) {
+  			return row.truename.replace(/(\s*$)/g,"");
+  		}
+  	}).result(function(e, item) {
+  		//$("#name").val(item.truename)
+	});
+	}
+	</script>
+</head>
+<body>
+	<div class="wrap_login">
+		<div class="main_login">
+			<div class="login_head">
+				<div class="login_head_l"><img src="images/logo_04.jpg" alt="智能管理系统" width="38" height="38" /></div>
+				<div class="login_head_r"><span>广元海和洋实业有限公司信息管理平台</span><sub class="small">版本号v1.0</sub></div>
+			</div>
+			<div class="login_panel">
+				<div class="login_tit">用户登录</div>
+				<form action="#" method="post">
+					<div class="login_input">
+						<input type="text" id="name" name="tbUser" class="text_input user_name" place-holder="请输入用户名" />
+						<input name="tbPwd" type="password" id="password" class="text_input user_password" place-holder="请输入密码"/>
+						<input type="button" class="summit" value="登录"  onclick="login();"/>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

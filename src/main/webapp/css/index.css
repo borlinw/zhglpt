@@ -1,0 +1,245 @@
+/* css初始化 */
+html {overflow-x: auto;overflow-y: scroll; }
+
+body, dl, dt, dd, ul, ol, li, pre, form, fieldset, input, p, blockquote, th, td, menu {
+  font-weight: 400;
+  margin: 0;
+  padding: 0; }
+
+h1, h2, h3, h4, h5, h6 {margin: 0;padding: 0;font-size: 100%;font-weight: 400; }
+
+body {font: normal 12px/1.5 "Arial", "Microsoft YaHei", "SimSun", "Tahoma", "Helvetica", "sans-serif";
+  text-align: left;  box-sizing: border-box; min-height: 100%;color: #666;}
+
+fieldset, img {border: 0 none; }
+
+input, button, select, textarea {outline: 0; }
+input{border:none;}
+
+/*去掉高级浏览器表单的默认小图标，如：关闭小×*/
+::-ms-clear, ::-ms-reveal{display: none;}
+
+img,input {vertical-align: middle; }
+
+address, caption, em, strong, th, i {font-style: normal;font-weight: 400; }
+
+ol, ul, li {list-style-image: none;list-style-position: outside; list-style-type: none; }
+
+html, body {-webkit-text-size-adjust: none; }
+
+table, table td, table th {border-collapse: collapse;border-spacing: 0;font-size:12px;}
+
+a {text-decoration: none;color: #333;outline: 0;cursor: pointer; }
+
+.clearfix:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;overflow: hidden; }
+
+.clearfix {display: block;*display: inline-block;_zoom: 1; }
+
+.fl {float: left; }
+
+.fr {float: right; }
+/* 初始化结束 */
+/* 网页总入口开始 */
+div.wrap {
+	width: 100%;
+	height: 100%;
+	/* min-height: 600px;
+	max-height: 800px; */
+	_height:800px;
+	background: url("../images/index_bg_01.jpg") top left repeat-x;
+	overflow: hidden;
+}
+.logo_zone {
+	width: 1042px;
+	height: 255px;
+	margin: 0 auto 0 auto;
+	overflow: hidden;
+}
+.main_zone {
+	width: 1042px;
+	height: 343px;
+	margin: 1px auto 0 auto;
+	background: url("../images/main_bg_new.jpg") center left no-repeat;
+	position: relative;
+}
+.title {
+	width: 748px;
+	height: 64px;
+	margin: 100px auto 0 auto;
+}
+.title_l {
+	width: 64px;
+	height: 64px;
+	float: left;
+	background: url("../images/logo_04.png") center left no-repeat;
+}
+.title_r {
+	overflow: hidden;
+	height: 64px;
+	font-size: 36px;
+	color: #fff;
+	text-indent: 18px;
+	line-height: 64px;
+}
+.fun_ico {
+	width: 110px;
+	height: 110px;
+	position: absolute;
+	display: block;
+	cursor: pointer;
+}
+.ico1 {
+	background: url("../images/icon_2.png") center left no-repeat;
+	/* margin: 55px 0 0 70px; */
+	top: 84px;
+	left: 106px;
+}
+.ico2 {
+	background: url("../images/icon_1.png") center left no-repeat;
+	/* margin: 121px 0 0 337px; */
+	top: 115px;
+	left: 459px;
+}
+.ico3 {
+	background: url("../images/icon_3.png") center left no-repeat;
+	/* margin: 110px 0 0 613px; */
+	top: 80px;
+	left: 816px;
+}
+
+.ico4 {
+	background: url("../images/icon_03.jpg") center left no-repeat;
+	/* margin: 55px 0 0 895px; */
+	top: 49px;
+	left: 882px;
+}
+.menu {
+	position: absolute;
+	color: #656565;
+	font-size: 18px;
+}
+.menu1 {
+	top: 253px;
+	left: 120px;
+}
+.menu2 {
+	top: 286px;
+	left: 483px;
+}
+.menu3 {
+	top: 253px;
+	left: 840px;
+}
+.menu4 {
+	top: 250px;
+	left: 910px;
+}
+/* 网页总入口结束 */
+/* 登录页面样式开始 */
+.wrap_login {
+	width: 100%;
+	height: 700px;
+	background: url("../images/login.jpg") bottom center  no-repeat;
+	overflow: hidden;
+}
+.main_login {
+	width: 640px;
+	height: 540px;
+	margin: 35px auto 0 auto;
+	overflow: hidden;
+}
+.login_head {
+	width: 640px;
+	height: 38px;
+	margin-top: 10px;
+}
+.login_head_l {
+	width: 65px;
+	float: left;
+	padding-left: 16px;
+}
+.login_head_r {
+	overflow: hidden;
+	height: 38px;
+	font-size: 26px;
+	color: #fff;
+	line-height: 38px;
+}
+sub.small {
+	font-size: 16px;
+	vertical-align: baseline;
+	margin-left: 5px;
+}
+.login_panel {
+	width: 480px;
+	height: 370px;
+	margin: 45px 0 0 77px;
+	background-color: #fff;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.login_tit {
+	width: 480px;
+	height: 110px;
+	color: #0aa2b9;
+	font-size: 28px;
+	text-align: center;
+	line-height: 110px;
+}
+div.login_input {
+	width: 362px;
+	height: 200px;
+	margin: 0 auto;
+}
+.text_input {
+	width: 310px;
+	height: 44px;
+	*line-height: 44px;
+	border: 1px solid #ceecf1;
+	/* background-color: #fff; */
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding-left: 50px;
+	font-size: 16px;
+	color: #656565;
+}
+.user_name {
+	background: #fff url("../images/login_03.jpg") 12px 10px  no-repeat;
+}
+.user_name:focus,.user_password:focus {
+	border-color: #0aa2b9;
+}
+.user_password {
+	background: #fff url("../images/login_06.jpg") 12px 10px  no-repeat;
+	margin-top: 18px;
+}
+.forget_password {
+	float: right;
+	display: block;
+	text-align: right;
+	font-size: 14px;
+	height: 16px;
+	line-height: 16px;
+	margin-top: 10px;
+}
+.summit {
+	width: 362px;
+	height: 44px;
+	margin: 18px auto 0 auto;
+	background-color: #0aa2b9;
+	line-height: 44px;
+	font-size: 18px;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+}
+/* 登录页面样式结束 */
+
+

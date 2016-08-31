@@ -166,7 +166,7 @@
 		function ckwj(index){
 			var data=$("#datagrid").datagrid('getRows')[index];
 			obj=data;
-			YMLib.UI.createWindow('zcwj','政策文件详情','zcwj_ck.jsp','zcwj',730,300);
+			YMLib.UI.createWindow('zcwj','制度文件详情','zcwj_ck.jsp','zcwj',730,300);
 		}
 	</script>
 	<style type="text/css">

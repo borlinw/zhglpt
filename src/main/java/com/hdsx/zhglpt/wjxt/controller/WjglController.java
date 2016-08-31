@@ -159,10 +159,15 @@ public class WjglController extends BaseActionSupport{
 			wjgl.setWjfile(inputStreamToByte(inputStream));
 			wjgl.setFileurl(fileurl);
 			wjgl.setWjgy(wjgy);
-			boolean bl=wjglServer.uploadWjFile(wjgl);
+			
 			File file =new File(fileurl);
-			uploadFile(file,fileuploadFileName,
+			boolean have=uploadFile(file,fileuploadFileName,
 					fileupload);
+			if(!have){
+				response.getWriter().print(fileuploadFileName+"    已存在，请重命名文件或删除之前已存在的文件"+s1);
+			}
+			
+			boolean bl=wjglServer.uploadWjFile(wjgl);
 			if(bl)
 			response.getWriter().print(fileuploadFileName+"    上传成功"+s1);
 			else
@@ -175,12 +180,17 @@ public class WjglController extends BaseActionSupport{
 	}
 	
 
-	private void uploadFile(File file,String fileName,File filewj) throws FileNotFoundException,IOException {
+	private boolean uploadFile(File file,String fileName,File filewj) throws FileNotFoundException,IOException {
 		if(!file.exists()){
 			file.mkdirs();
 		}
-		InputStream is = new FileInputStream(filewj); 
+		
 		File saveFile =new File(file, fileName);
+		boolean have=saveFile.exists();
+		if(have){
+			return false;
+		}
+		InputStream is = new FileInputStream(filewj); 
 		OutputStream os = new FileOutputStream(saveFile);
 		//设置缓存  
 		byte[] buffer = new byte[1024]; 
@@ -191,6 +201,7 @@ public class WjglController extends BaseActionSupport{
 		is.close();
 		os.flush();
 		os.close();
+		return true;
 	}
 	public void deleteWjfile(){
 		boolean bl=wjglServer.deleteWjfile(wjgl);

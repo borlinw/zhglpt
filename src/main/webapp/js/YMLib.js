@@ -1134,30 +1134,28 @@ function createMenu(_xtype, _json) {// 左侧菜单生成
 		var renderTo = typeof _json.renderTo != 'undefined' ? _json.renderTo
 				: null;
 		var href = typeof _json.href != 'undefined' ? _json.href : null;
-		// var fun = typeof _json.click != 'undefined' ? _json.click : null;
+		var fun = typeof _json.click != 'undefined' ? _json.click : null;
 		
 		var html = "<div id='"+ id+ "' style='display:none;float:left;width:180px;heigth:52px;margin:5px 0 0 15px;'>" +
-				"<a  href='"
-				+ href
-				+ "' target='rightContent' style='text-decoration:none;'><div style='float:left; display:inline;margin-right:5px;'><img style='border:none;' src='"
+				"<a href='"+href+"' target='rightContent' style='text-decoration:none;'><div style='float:left; display:inline;margin-right:5px;'><img style='border:none;' src='"
 		+ imgSrc + "' alt='" + title + "' title='" + title+ "'/></div>" +
 				"<div style=' float:left; display:inline;width:127px;padding-top:15px; line-height:10px; '><span>" + title + "</span></div></a></div>";
 		
 		
 		$("#" + renderTo).append(html);
-		// $("#"+id).click(fun);
+		$("#"+id).click(fun);
 		id = null;
 		title = null;
 		imgSrc = null;
 		renderTo = null;
 		html = null;
-		// fun = null;
+		fun = null;
 		delete id;
 		delete title;
 		delete imgSrc;
 		delete renderTo;
 		delete html;
-		// delete fun;
+		delete fun;
 		break;
 	default:
 		alert("错误的类型");

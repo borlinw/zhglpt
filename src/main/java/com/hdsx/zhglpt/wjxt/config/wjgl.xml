@@ -160,7 +160,7 @@
 	</select>
 	
 	<select id="selectWjfile" parameterType="wjgl" resultType="wjgl">
-		select id,wjid,wjname from ZCWJ_FILE where wjid=#{wjid}
+		select id,wjid,wjname,fileurl from ZCWJ_FILE where wjid=#{wjid}
 	</select>
 	<select id="selectWjById" parameterType="wjgl" resultType="wjgl">
 		select * from ZCWJ_FILE where id=#{id}

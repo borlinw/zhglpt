@@ -164,14 +164,14 @@ public class WjglController extends BaseActionSupport{
 			boolean have=uploadFile(file,fileuploadFileName,
 					fileupload);
 			if(!have){
-				response.getWriter().print(fileuploadFileName+"    已存在，请重命名文件或删除之前已存在的文件"+s1);
+				response.getWriter().print(fileuploadFileName+"已存在，请重命名文件或删除之前已存在的文件");
+			}else{
+				boolean bl=wjglServer.uploadWjFile(wjgl);
+				if(bl)
+				response.getWriter().print(fileuploadFileName+"    上传成功"+s1);
+				else
+				response.getWriter().print(fileuploadFileName+"    上传失败"+s1);
 			}
-			
-			boolean bl=wjglServer.uploadWjFile(wjgl);
-			if(bl)
-			response.getWriter().print(fileuploadFileName+"    上传成功"+s1);
-			else
-			response.getWriter().print(fileuploadFileName+"    上传失败"+s1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			response.getWriter().print(fileuploadFileName +"上传失败！");
@@ -243,6 +243,13 @@ public class WjglController extends BaseActionSupport{
 		ResponseUtils.write(getresponse(), bl+"");
 	}
 	public void deleteZcwj(){
+		List<Wjgl> list = wjglServer.selectWjfile(wjgl);
+		for(Wjgl l:list){
+			File file =new File(l.getFileurl(), l.getWjname());
+			boolean have=file.exists();
+			if(have)			
+				file.delete();
+		}
 		boolean bl=wjglServer.deleteZcwj(wjgl);
 		ResponseUtils.write(getresponse(), bl+"");
 	}

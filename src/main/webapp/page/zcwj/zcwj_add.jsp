@@ -51,14 +51,15 @@
 			'buttonImg': '${pageContext.request.contextPath }/js/uploader/btn_view.png',
 			//按钮上的文字 
 			'simUploadLimit' : 3,
-			//一次同步上传的文件数目 
-			'sizeLimit' : 20000000,
+			//一次同步上传的文件数目
+			sizeLimit :20000000,
+			'fileSizeLimit': '20MB',
 			//设置单个文件大小限制 
 			'queueSizeLimit' : 5,
 			//队列中同时存在的文件个数限制 
-			'fileDesc' : '支持格式:xls',
+			'fileDesc' : '支持格式:doc,pdf,rar,jpg,png',
 			//如果配置了以下的'fileExt'属性，那么这个属性是必须的 
-			'fileExt' : '',
+			'fileExt' : '*.doc;*.pdf;*.rar;*.jpg;*.png',
 			//允许的格式   
 			'height' : 30,
 			'width' : 92,
@@ -70,13 +71,24 @@
 // 				if(response!=null||response!='error'){
 // 					addaqyb(response);
 // 				}
-//				alert(response);
-				$("#message").attr('color','green');
-				$("#message").html("文件上传成功");
+                if(response==fileObj.name+"已存在，请重命名文件或删除之前已存在的文件"){
+                	//$("#message").attr('color','red');
+    				//$("#message").html(fileObj.name+"已存在，请重命名文件或删除之前已存在的文件");
+    				alert(fileObj.name+"已存在，请重命名文件或删除之前已存在的文件.不影响其他文件上传");
+                }else{
+                	//$("#message").attr('color','green');
+    				//$("#message").html(fileObj.name+"文件上传成功");
+    				alert(fileObj.name+"上传成功");
+    				/* var arr=response.substr(response.length-32,response.length);
+//    				alert(response.substr(response.length-32,response.length).length);
+    				$('<li></li>').appendTo('.files').html(response.substr(0,response.length-32)+'<a id="'+arr+'" href="javascript:DelTz('+"'"+arr+"'"+')"  style="text-decoration:none;"> 删除 </a> ');
+ */
+                }
+			},
+			onAllComplete : function(event,data){
 				addaqyb();
-				var arr=response.substr(response.length-32,response.length);
-//				alert(response.substr(response.length-32,response.length).length);
-				$('<li></li>').appendTo('.files').html(response.substr(0,response.length-32)+'                   <a id="'+arr+'" href="javascript:DelTz('+"'"+arr+"'"+')"  style="text-decoration:none;"> 删除 </a> ');
+				alert('文件上传完成！');
+				fanhui();
 			},
 			onError : function(event, queueID, fileObj) {
 				alert("文件:" + fileObj.name + "上传失败");
@@ -135,8 +147,8 @@
 				async:false,
 				success:function(msg){
 					if(Boolean(msg)){
-						alert('保存成功！');
-						fanhui();
+						/* alert('保存成功！');
+						fanhui(); */
 					}else{
 						alert('保存失败！');
 					}
@@ -188,25 +200,7 @@
 		});	
 		
 	});
-	/* function setGydw(id, dwbm){
-			$('#' + id).tree(
-			{
-				checkbox : true,
-				//cascadeCheck : false, 
-				multiple:true,
-				url : '/zhglpt/gcgl/selAllBm3.do?yhdw=' + dwbm,
-				onCheck : function (node){
-					var nodes=$('#' + id).tree('getChecked');
-					var codes='';
-					$('#jsdw').val('');
-					for(var i=0;i<nodes.length;i++){
-						codes+=nodes[i].id+',';
-					}
-					$('#jsdw').val(codes);
-				},
-			});
-
-	} */
+	
 	function DelTz(str){
 //		alert(str);
 		var data="wjgl.id="+str;

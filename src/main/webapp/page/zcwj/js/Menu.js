@@ -11,14 +11,14 @@ $(function() {
 		title:'办公室档案',
 		imgSrc:'../../images/qtwj.png',
 		renderTo:'left_menu1',
-		href:'./qtwj.jsp'
+		href:'./bgda.jsp'
 	});
 	createMenu('LeftMenu',{
 		id:'menu_010103',
 		title:'工程档案',
 		imgSrc:'../../images/gcwj.png',
 		renderTo:'left_menu1',
-		href:'./jhwj.jsp'
+		href:'./gcda.jsp'
 	});
 	menuQx();
 	$("div[id^='menu'] a").click(function(){

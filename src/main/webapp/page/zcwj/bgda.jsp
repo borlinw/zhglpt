@@ -74,7 +74,7 @@
 			var jssj=$("#jssj").datebox('getValue');
 			//alert(kssj+"---"+jssj+"---"+gydw);
 			$('#datagrid').datagrid({    
-			    url:'/zhglpt/wjxt/selectqtwjlist.do',
+			    url:'/zhglpt/wjxt/selectjhwjlist.do',
 			    striped:true,
 			    pagination:true,
 			    rownumbers:true,
@@ -106,8 +106,8 @@
 		function xxtztj(){
 			var weatherDlg = new J.dialog( {
 				id : 'id2',
-				title : '其它文件添加',
-				page : 'qtwj_add.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=qtwj.jsp'+'&id='+new Date().getTime(),
+				title : '办公室档案添加',
+				page : 'bgda_add.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=bgda.jsp'+'&id='+new Date().getTime(),
 				width : 570,
 				height : 340,
 				top : 0,
@@ -124,8 +124,8 @@
 			obj=data;
 			var weatherDlg = new J.dialog( {
 				id : 'id2',
-				title : '其它文件编辑',
-				page : 'qtwj_xg.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=qtwj.jsp'+'&id='+data.id,
+				title : '办公室档案编辑',
+				page : 'bgda_xg.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=bgda.jsp'+'&id='+data.id,
 				width : 570,
 				height : 340,
 				top : 0,
@@ -142,7 +142,7 @@
 			var data=$("#datagrid").datagrid('getRows')[index];
 			$.ajax({
 				type:'post',
-				url:'/zhglpt/wjxt/deleteQtwj.do',
+				url:'/zhglpt/wjxt/deleteJhwj.do',
 				data:"wjgl.id="+data.id,
 				dataType:'json',
 				async:false,
@@ -162,7 +162,7 @@
 		function ckwj(index){
 			var data=$("#datagrid").datagrid('getRows')[index];
 			obj=data;
-			YMLib.UI.createWindow('zcwj','其它文件详情','qtwj_ck.jsp','zcwj',730,300);
+			YMLib.UI.createWindow('zcwj','办公室档案详情','bgda_ck.jsp','zcwj',730,300);
 		}
 	</script>
 	<style type="text/css">
@@ -188,7 +188,7 @@ a:active {
 			<tr>
 			<td>
 			<div id="righttop">
-						<div id="p_top">当前位置>&nbsp;文件管理>&nbsp;其它文件</div>
+						<div id="p_top">当前位置>&nbsp;文件管理>&nbsp;办公室档案</div>
 			</div>
 	           </td>
         	</tr>

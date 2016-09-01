@@ -232,7 +232,7 @@ a:active {
 
             <tr>
                 <td style="padding-top: 1%;padding-left:10px;">
-				<table id="datagrid" >
+				<table id="datagrid" data-options="nowrap:false">
 				</table>
 				</td>
 			</tr>

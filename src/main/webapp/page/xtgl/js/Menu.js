@@ -33,8 +33,8 @@ $(function() {
 	
 	menuQx();
 	$("div[id^='menu'] a").click(function(){
-		$(this).css("color","red");
-		$(this).parents($("div[id^='menu']")).siblings().children("a").css("color","black");
+		$(this).css("color","#0000ee");
+		$(this).parents($("div[id^='menu']")).siblings().children("a").css("color","#551a8b");
 	})
 });
 function menuQx(){

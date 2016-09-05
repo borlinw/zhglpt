@@ -54,7 +54,10 @@ public class WjglServerImpl extends BaseOperate implements WjglServer {
 	public List<Wjgl> selectWjfile(Wjgl wjgl) {
 		return queryList("selectWjfile",wjgl);
 	}
-
+	public List<Wjgl> selectWjfileByWjid(Wjgl wjgl) {
+		return queryList("selectWjfileByWjid",wjgl);
+	}
+	
 	
 	public Wjgl selectWjById(Wjgl wjgl) {
 		// TODO Auto-generated method stub

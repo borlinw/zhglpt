@@ -229,6 +229,17 @@ public class WjglController extends BaseActionSupport{
 		boolean bl=wjglServer.deleteWjfile(wjgl);
 		ResponseUtils.write(getresponse(), bl+"");
 	}
+	public void deleteGcdafile(){
+		List<Wjgl> list = wjglServer.selectWjfileByWjid(wjgl);
+		for(Wjgl l:list){
+			File file =new File(l.getFileurl(), l.getWjname());
+			boolean have=file.exists();
+			if(have)			
+				file.delete();
+		}
+		boolean bl=wjglServer.deleteWjfile(wjgl);
+		ResponseUtils.write(getresponse(), bl+"");
+	}
 	public void deleteWjfile1(){
 		boolean bl=wjglServer.deleteWjfile1(id);
 		ResponseUtils.write(getresponse(), bl+"");

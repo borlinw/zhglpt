@@ -134,8 +134,21 @@
 		function ckwj(index){
 			var data=$("#datagrid").datagrid('getRows')[index];
 			obj=data;
-			YMLib.UI.createWindow('zcwj','工程档案详情','gcda_ck.jsp','zcwj',730,300);
+			var weatherDlg = new J.dialog( {
+				id : 'id2',
+				title : '工程档案编辑',
+				page : 'gcda_ck.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=gcda.jsp'+'&id='+data.id,
+				width : 570,
+				height : 340,
+				top : 0,
+				rang : true,
+				resize : false,
+				cover : true
+			});
+			weatherDlg.ShowDialog();
+			return false;
 		}
+		
 	</script>
 	<style type="text/css">
 <!--

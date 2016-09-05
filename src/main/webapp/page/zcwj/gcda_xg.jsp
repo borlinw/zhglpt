@@ -151,7 +151,6 @@
 		+"&gcda.lb="+$("#lb").val()+"&gcda.cs="+$("#cs").val()+"&gcda.bz="+$("#bz").val()
 		+"&gcda.cfwz="+$("#cfwz").val()
 		+"&gcda.id="+request('id')+"&gcda.rq="+$("#rq").val();
-		alert($("#rq").val());
 		$.ajax({
 				type:'post',
 				url:'/zhglpt/wjxt/updateQtwj.do',
@@ -261,11 +260,11 @@
 	}
 	function DelTz(str){
 //		alert(str);
-		var data="wjgl.id="+str;
+		var data="wjgl.wjid="+str+"&wjgl.id="+str;
 		if(confirm("确认删除吗？")){
 			$.ajax({
 				type:'post',
-				url:'/zhglpt/wjxt/deleteWjfile.do',
+				url:'/zhglpt/wjxt/deleteGcdafile.do',
 				data:data,
 				dataType:'json',
 				success:function(msg){

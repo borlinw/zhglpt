@@ -21,6 +21,7 @@ public interface WjglServer {
 	int selectzcwjlistCount(Wjgl wjgl);
 
 	List<Wjgl> selectWjfile(Wjgl wjgl);
+	List<Wjgl> selectWjfileByWjid(Wjgl wjgl);
 
 	Wjgl selectWjById(Wjgl wjgl);
 

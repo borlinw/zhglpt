@@ -21,6 +21,7 @@
 	<action name="selectjhwjlist" class="wjglController" method="selectjhwjlist"/>
 	<action name="selectWjfile" class="wjglController" method="selectWjfile"/>
 	<action name="downWjFile" class="wjglController" method="downWjFile"/>
+	<action name="deleteGcdafile" class="wjglController" method="deleteGcdafile"/>
 	
 	
 	<action name="insertTrqk" class="trqkController" method="insertTrqk"/>

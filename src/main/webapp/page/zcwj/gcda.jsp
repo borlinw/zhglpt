@@ -115,7 +115,7 @@
 			$.ajax({
 				type:'post',
 				url:'/zhglpt/wjxt/deleteQtwj.do',
-				data:"wjgl.id="+data.id,
+				data:"wjgl.wjid="+data.id+"&wjgl.id="+data.id,
 				dataType:'json',
 				async:false,
 				success:function(msg){

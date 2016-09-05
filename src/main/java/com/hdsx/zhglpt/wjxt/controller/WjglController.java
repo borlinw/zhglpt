@@ -287,6 +287,13 @@ public class WjglController extends BaseActionSupport{
 		ResponseUtils.write(getresponse(), bl+"");
 	}
 	public void deleteQtwj(){
+		List<Wjgl> list = wjglServer.selectWjfile(wjgl);
+		for(Wjgl l:list){
+			File file =new File(l.getFileurl(), l.getWjname());
+			boolean have=file.exists();
+			if(have)			
+				file.delete();
+		}
 		boolean bl=wjglServer.deleteQtwj(wjgl);
 		ResponseUtils.write(getresponse(), bl+"");
 	}

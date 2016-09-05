@@ -51,7 +51,7 @@
 		delete from ZCWJ_ZCWJ where id=#{id}
 	</delete>
 	<delete id="deleteQtwj" parameterType="wjgl">
-		delete from ZCWJ_QTWJ where id=#{id}
+		delete from ZCWJ_gcda where id=#{id}
 	</delete>
 	<delete id="deleteJhwj" parameterType="wjgl">
 		delete from ZCWJ_JHWJ where id=#{id}

@@ -51,14 +51,15 @@
 			'buttonImg': '${pageContext.request.contextPath }/js/uploader/btn_view.png',
 			//按钮上的文字 
 			'simUploadLimit' : 3,
-			//一次同步上传的文件数目 
-			'sizeLimit' : 20000000,
+			//一次同步上传的文件数目
+			sizeLimit :20000000,
+			'fileSizeLimit': '20MB',
 			//设置单个文件大小限制 
 			'queueSizeLimit' : 5,
 			//队列中同时存在的文件个数限制 
-			'fileDesc' : '支持格式:xls',
+			'fileDesc' : '支持格式:doc,pdf,rar,jpg,png',
 			//如果配置了以下的'fileExt'属性，那么这个属性是必须的 
-			'fileExt' : '',
+			'fileExt' : '*.doc;*.pdf;*.rar;*.jpg;*.png',
 			//允许的格式   
 			'height' : 30,
 			'width' : 92,
@@ -70,11 +71,22 @@
 // 				if(response!=null||response!='error'){
 // 					addaqyb(response);
 // 				}
-//				alert(response);
-				flagsc=true;
-				var arr=response.substr(response.length-32,response.length);
-//				alert(response.substr(response.length-32,response.length).length);
-				$('<li></li>').appendTo('.files').html(response.substr(0,response.length-32)+'                   <a id="'+arr+'" href="javascript:DelTz('+"'"+arr+"'"+')"  style="text-decoration:none;"> 删除 </a> ');
+                if(response==fileObj.name+"已存在，请重命名文件或删除之前已存在的文件"){
+                	//$("#message").attr('color','red');
+    				//$("#message").html(fileObj.name+"已存在，请重命名文件或删除之前已存在的文件");
+    				alert(fileObj.name+"已存在，请重命名文件或删除之前已存在的文件.不影响其他文件上传");
+                }else{
+                	//$("#message").attr('color','green');
+    				//$("#message").html(fileObj.name+"文件上传成功");
+    				alert(fileObj.name+"上传成功");
+    				/* var arr=response.substr(response.length-32,response.length);
+//    				alert(response.substr(response.length-32,response.length).length);
+    				$('<li></li>').appendTo('.files').html(response.substr(0,response.length-32)+'<a id="'+arr+'" href="javascript:DelTz('+"'"+arr+"'"+')"  style="text-decoration:none;"> 删除 </a> ');
+ */
+                }
+			},
+			onAllComplete : function(event,data){
+				addaqyb();
 			},
 			onError : function(event, queueID, fileObj) {
 				alert("文件:" + fileObj.name + "上传失败");
@@ -88,7 +100,7 @@
 			}
 		});
 
-	});
+	});		
    function request(strParame) {
    	var args = new Object( );
    	var query = location.search.substring(1);
@@ -107,24 +119,39 @@
 </script>
 <script type="text/javascript">
 	function addaqyb(){
-		if($("#jsdw").val()==''){
-			alert("请选择接收单位");
+		if($("#xmmc").val()==''){
+			alert("请填写项目名称");
 			return;
 		}
-		if($("#wjmc").val()==''){
-			alert("请添加通知名称");
+		if($("#damc").val()==''){
+			alert("请填写档案名称");
 			return;
 		}
-		if($("#wjgy").val()==''){
-			alert("请添加通知内容");
+		if($("#bzdw").val()==''){
+			alert("请填写编制单位");
 			return;
 		}
-		if(!confirm("确认保存吗？")){
+		if($("#lb").val()==''){
+			alert("请填写类别");
 			return;
 		}
-		var data= "wjgl.jsdw="+$("#jsdw").val()+"&wjgl.wjmc="+$("#wjmc").val()+"&wjgl.wjgy="+$("#wjgy").val()+"&wjgl.fbdw="+$.cookie("unit")
-		+"&wjgl.id="+request('id')+"&wjgl.fbr="+$.cookie("truename");
-		//alert(data);
+		if($("#cs").val()==''){
+			alert("请填写册数");
+			return;
+		}
+		if($("#cfwz").val()==''){
+			alert("请填写存放位置");
+			return;
+		}
+		
+// 		if(!confirm("确认保存吗？")){
+// 			return;
+// 		}
+		var data= "gcda.xmmc="+$("#xmmc").val()+"&gcda.damc="+$("#damc").val()+"&gcda.bzdw="+$("#bzdw").val()
+		+"&gcda.lb="+$("#lb").val()+"&gcda.cs="+$("#cs").val()+"&gcda.bz="+$("#bz").val()
+		+"&gcda.cfwz="+$("#cfwz").val()
+		+"&gcda.id="+request('id')+"&gcda.rq="+$("#rq").val();
+		alert($("#rq").val());
 		$.ajax({
 				type:'post',
 				url:'/zhglpt/wjxt/updateQtwj.do',
@@ -133,9 +160,8 @@
 				async:false,
 				success:function(msg){
 					if(Boolean(msg)){
-						flagadd=true;
-						alert('请勿关闭窗口，等待文件上传成功后自动关闭，如未修改文件，请手动返回！');
-						closeck();
+						alert('保存成功！');
+						fanhui();
 					}else{
 						alert('保存失败！');
 					}
@@ -150,31 +176,41 @@
 		uploadifyUpload();
 	}
 	function tianjia(){
+			
+			if($("#fileQueue").text()==''){
+				//alert("请添加上传文件");
+				 addaqyb();
+			}
 			uploadifyUpload();
-			addaqyb();
-		//uploadifyUpload();
 	}
 	function uploadifyUpload() {
 		$('#fileupload').uploadifyUpload();
-	}
-	var flagadd=false;
-	var flagsc=false;
-	function closeck(){
-		if(flagadd&&flagsc){
-			fanhui();
-		}else{
-			setTime('closeck()',1000);
-		}
 	}
 	function fanhui() {
 		var flag=request('flag');
 		parent.window.location = '/zhglpt/page/zcwj/'+flag;
  		dg.cancel();
 	}
-	$(function(){
+// 	var flagadd=false;
+// 	var flagsc=false;
+// 	function closeck(){
+// 		if(flagadd&&flagsc){
+// 			fanhui();
+// 		}else{
+// 			setTime('closeck()',1000);
+// 		}
+// 	}
+
+		$(function(){
 		var data=parent.obj;
-		$("#wjmc").val(data.wjmc);
-		$("#wjgy").val(data.wjgy);
+		$("#xmmc").val(data.xmmc);
+		$("#damc").val(data.damc);
+		$("#bzdw").val(data.bzdw);
+		$("#lb").val(data.lb);
+		$("#rq").val(data.rq);
+		$("#cs").val(data.cs);
+		$("#bz").val(data.bz);
+		$("#cfwz").val(data.cfwz);
 		var data1="id="+data.id;
 		$.ajax({
 			type:'post',
@@ -189,7 +225,9 @@
 				$('<li></li>').appendTo('.files').html(msg[i].wjname+'                 <a id="'+msg[i].id+'" href="javascript:DelTz('+"'"+msg[i].id+"'"+')"  style="text-decoration:none;"> 删除 </a> '  );
 			}
 		});	
-		setGydw("jsdw","36");
+		
+		$("#rq").datebox({    
+		});  
 		var data1="yhdw="+$.cookie("unit");
 		$.ajax({
 			type:'post',
@@ -200,6 +238,7 @@
 				$("#fsdwmc").val(msg[0].text);
 			}
 		});	
+		
 	});
 	function setGydw(id, dwbm){
 			$('#' + id).tree(
@@ -207,7 +246,7 @@
 				checkbox : true,
 				//cascadeCheck : false, 
 				multiple:true,
-				url : '/zhglpt/gcgl/selAllBm7.do?id=' + parent.obj.id,
+				url : '/zhglpt/gcgl/selAllBm3.do?yhdw=' + dwbm,
 				onCheck : function (node){
 					var nodes=$('#' + id).tree('getChecked');
 					var codes='';
@@ -257,26 +296,91 @@
                                 <td style="border-style: none none solid none; border-width: 1px; border-color: #C0C0C0;
                                     color: #007DB3; font-weight: bold; font-size: small; text-align: right; background-color: #F1F8FF;
                                     padding-right: 5px; vertical-align: middle;">
-                                    <b><font color="#009ACD" style="font-size: 12px;">接收单位 </font></b>
+                                    <b><font color="#009ACD" style="font-size: 12px;">项目名称</font></b>
                                 </td>
                                 <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
                                     border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
-                               		<ul id="jsdw"></ul>
-                                   <input type="hidden" id="jsdw">
+                                 <input type="text" id="xmmc"  style="width: 300px;">
                                 </td>
                             </tr>
                             <tr style="height: 35px;">
                                 <td style="border-style: none none solid none; border-width: 1px; border-color: #C0C0C0;
                                     color: #007DB3; font-weight: bold; font-size: small; text-align: right; background-color: #F1F8FF;
                                     padding-right: 5px; vertical-align: middle;">
-                                    <b><font color="#009ACD" style="font-size: 12px">文件名称 </font></b>
+                                    <b><font color="#009ACD" style="font-size: 12px">档案名称 </font></b>
                                 </td>
                                 <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
                                     border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
-                                 <input type="text" id="wjmc"  style="width: 300px;">
+                                 <input type="text" id="damc"  style="width: 300px;">
                                 </td>
                             </tr>
-                             <!--  <tr style="height: 35px;">
+                            <tr style="height: 35px;">
+                                <td style="border-style: none none solid none; border-width: 1px; border-color: #C0C0C0;
+                                    color: #007DB3; font-weight: bold; font-size: small; text-align: right; background-color: #F1F8FF;
+                                    padding-right: 5px; vertical-align: middle;">
+                                    <b><font color="#009ACD" style="font-size: 12px">编制单位 </font></b>
+                                </td>
+                                <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
+                                    border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
+                                 <input type="text" id="bzdw"  style="width: 300px;">
+                                </td>
+                            </tr>
+                            <tr style="height: 35px;">
+                                <td style="border-style: none none solid none; border-width: 1px; border-color: #C0C0C0;
+                                    color: #007DB3; font-weight: bold; font-size: small; text-align: right; background-color: #F1F8FF;
+                                    padding-right: 5px; vertical-align: middle;">
+                                    <b><font color="#009ACD" style="font-size: 12px">类别 </font></b>
+                                </td>
+                                <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
+                                    border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
+                                 <input type="text" id="lb"  style="width: 300px;">
+                                </td>
+                            </tr>
+                            <tr style="height: 35px;">
+                                <td style="border-style: none none solid none; border-width: 1px; border-color: #C0C0C0;
+                                    color: #007DB3; font-weight: bold; font-size: small; text-align: right; background-color: #F1F8FF;
+                                    padding-right: 5px; vertical-align: middle;">
+                                    <b><font color="#009ACD" style="font-size: 12px">日期</font></b>
+                                </td>
+                                <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
+                                    border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
+                                 <input type="text" id="rq"  style="width: 300px;">
+                                </td>
+                            </tr>
+                            <tr style="height: 35px;">
+                                <td style="border-style: none none solid none; border-width: 1px; border-color: #C0C0C0;
+                                    color: #007DB3; font-weight: bold; font-size: small; text-align: right; background-color: #F1F8FF;
+                                    padding-right: 5px; vertical-align: middle;">
+                                    <b><font color="#009ACD" style="font-size: 12px">册数</font></b>
+                                </td>
+                                <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
+                                    border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
+                                 <input type="text" id="cs"  style="width: 300px;">
+                                </td>
+                            </tr>
+                            <tr style="height: 35px;">
+                                <td style="border-style: none none solid none; border-width: 1px; border-color: #C0C0C0;
+                                    color: #007DB3; font-weight: bold; font-size: small; text-align: right; background-color: #F1F8FF;
+                                    padding-right: 5px; vertical-align: middle;">
+                                    <b><font color="#009ACD" style="font-size: 12px">存放位置 </font></b>
+                                </td>
+                                <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
+                                    border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
+                                 <input type="text" id="cfwz"  style="width: 300px;">
+                                </td>
+                            </tr>
+                            <tr style="height: 35px;">
+                                <td style="border-style: none none solid none; border-width: 1px; border-color: #C0C0C0;
+                                    color: #007DB3; font-weight: bold; font-size: small; text-align: right; background-color: #F1F8FF;
+                                    padding-right: 5px; vertical-align: middle;">
+                                    <b><font color="#009ACD" style="font-size: 12px">备注 </font></b>
+                                </td>
+                                <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
+                                    border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
+                                 <input type="text" id="bz"  style="width: 300px;">
+                                </td>
+                            </tr>
+                            <!--   <tr style="height: 35px;">
                                 <td style="border-style: none none solid none; border-width: 1px; border-color: #C0C0C0;
                                     color: #007DB3; font-weight: bold; font-size: small; text-align: right; background-color: #F1F8FF;
                                     padding-right: 5px; vertical-align: middle;">
@@ -299,10 +403,11 @@
                                     border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="1">
                                    <input type="file" name="fileupload" id="fileupload" /><span style="font-size: x-small;vertical-align: 120%">(小于20M)</span>
                                 </td>
-                               <!--  <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
+                                <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
                                     border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="2">
-                                   <a href="javascript:;" onClick="shangchuan()"  class="easyui-linkbutton" > 上传 </a> 
-                                </td> -->
+                                   <font id="message" color="red"></font>
+                                </td>
+                               
                             </tr>
                             <tr style="height: 64px;" >
                                 <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
@@ -318,6 +423,7 @@
 				class="as" > 保存 </a> 
             <a href="#" class="easyui-linkbutton" iconCls="back" onclick="fanhui()" >返回 </a>
            </p>
+		
 		</center>
 	</form>
 </body>

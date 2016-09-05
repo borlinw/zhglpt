@@ -3,6 +3,7 @@ package com.hdsx.zhglpt.wjxt.server;
 import java.util.List;
 import java.util.Map;
 
+import com.hdsx.zhglpt.wjxt.bean.Gcda;
 import com.hdsx.zhglpt.wjxt.bean.Wjgl;
 
 public interface WjglServer {
@@ -27,15 +28,15 @@ public interface WjglServer {
 
 	boolean deleteZcwj(Wjgl wjgl);
 
-	boolean insertQtwj(Wjgl wjgl);
+	boolean insertQtwj(Gcda wjgl);
 
-	List<Wjgl> selectqtwjlist(Wjgl wjgl);
+	List<Gcda> selectqtwjlist(Gcda wjgl);
 
-	int selectqtwjlistCount(Wjgl wjgl);
+	int selectqtwjlistCount(Gcda wjgl);
 
 	boolean deleteQtWjfile1(String id);
 
-	boolean updateQtwj(Wjgl wjgl);
+	boolean updateQtwj(Gcda wjgl);
 
 	boolean deleteQtwj(Wjgl wjgl);
 

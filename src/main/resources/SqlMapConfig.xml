@@ -15,6 +15,7 @@
      <typeAlias type="com.hdsx.zhglpt.xtgl.bean.ProgBean" alias="pb"/>
      
       <typeAlias type="com.hdsx.zhglpt.wjxt.bean.Wjgl" alias="wjgl"/>
+      <typeAlias type="com.hdsx.zhglpt.wjxt.bean.Gcda" alias="gcda"/>
       <typeAlias type="com.hdsx.zhglpt.wjxt.bean.FileUrl" alias="fileUrl"/>
       <typeAlias type="com.hdsx.zhglpt.wjxt.controller.Excel_list" alias="elist"/>
  

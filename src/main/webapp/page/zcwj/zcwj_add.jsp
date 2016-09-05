@@ -87,8 +87,6 @@
 			},
 			onAllComplete : function(event,data){
 				addaqyb();
-				alert('文件上传完成！');
-				fanhui();
 			},
 			onError : function(event, queueID, fileObj) {
 				alert("文件:" + fileObj.name + "上传失败");
@@ -147,8 +145,8 @@
 				async:false,
 				success:function(msg){
 					if(Boolean(msg)){
-						/* alert('保存成功！');
-						fanhui(); */
+						alert('保存成功！');
+						fanhui(); 
 					}else{
 						alert('保存失败！');
 					}

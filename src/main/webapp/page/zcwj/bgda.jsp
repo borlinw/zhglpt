@@ -24,7 +24,7 @@
 	</style>
 	<script type="text/javascript">
 		$(function(){
-			var date=new Date();
+			/* var date=new Date();
 			var y = date.getFullYear();
 			var m = date.getMonth()+1;
 			var d = date.getDate(); 
@@ -63,7 +63,7 @@
 					d=28
 				}
 			}
-			$('#kssj').datebox('setValue', y1+"-"+m1+"-"+d);
+			$('#kssj').datebox('setValue', y1+"-"+m1+"-"+d); */
 			
 			showAll();
 		});

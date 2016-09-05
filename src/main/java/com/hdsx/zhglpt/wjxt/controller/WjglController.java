@@ -19,15 +19,6 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-
-
-
-
-
-
-
-
-
 import com.hdsx.zhglpt.file.bean.MyFile;
 import com.hdsx.zhglpt.file.controller.PropertiesReader;
 import com.hdsx.zhglpt.utile.EasyUIPage;
@@ -37,6 +28,7 @@ import com.hdsx.zhglpt.wjxt.bean.FileUrl;
 import com.hdsx.zhglpt.wjxt.bean.Wjgl;
 import com.hdsx.zhglpt.wjxt.server.WjglServer;
 import com.hdsx.webutil.struts.BaseActionSupport;
+import com.hdsx.zhglpt.wjxt.bean.Gcda;
 
 
 /**
@@ -54,6 +46,7 @@ public class WjglController extends BaseActionSupport{
 	@Resource(name = "wjglServerImpl")
 	private WjglServer wjglServer;
 	private Wjgl wjgl=new Wjgl();
+	private Gcda gcda=new Gcda();
 	private String id;
 	private String fileuploadFileName;
 	private File fileupload;
@@ -61,6 +54,28 @@ public class WjglController extends BaseActionSupport{
 	private String kssj;
 	private String jssj;
 	private String wjmc;
+	private String xmmc;
+	private String damc;
+	private String bzdw;
+	
+	public String getXmmc() {
+		return xmmc;
+	}
+	public void setXmmc(String xmmc) {
+		this.xmmc = xmmc;
+	}
+	public String getDamc() {
+		return damc;
+	}
+	public void setDamc(String damc) {
+		this.damc = damc;
+	}
+	public String getBzdw() {
+		return bzdw;
+	}
+	public void setBzdw(String bzdw) {
+		this.bzdw = bzdw;
+	}
 	public String getWjtype() {
 		return wjtype;
 	}
@@ -132,6 +147,13 @@ public class WjglController extends BaseActionSupport{
 	}
 	public void setWjgl(Wjgl wjgl) {
 		this.wjgl = wjgl;
+	}
+	
+	public Gcda getGcda() {
+		return gcda;
+	}
+	public void setGcda(Gcda gcda) {
+		this.gcda = gcda;
 	}
 	public int getPage() {
 		return page;
@@ -222,7 +244,7 @@ public class WjglController extends BaseActionSupport{
 		ResponseUtils.write(getresponse(), bl+"");
 	}
 	public void insertQtwj(){
-		boolean bl=wjglServer.insertQtwj(wjgl);
+		boolean bl=wjglServer.insertQtwj(gcda);
 		ResponseUtils.write(getresponse(), bl+"");
 	}
 	public void insertJhwj(){
@@ -235,7 +257,7 @@ public class WjglController extends BaseActionSupport{
 		ResponseUtils.write(getresponse(), bl+"");
 	}
 	public void updateQtwj(){
-		boolean bl=wjglServer.updateQtwj(wjgl);
+		boolean bl=wjglServer.updateQtwj(gcda);
 		ResponseUtils.write(getresponse(), bl+"");
 	}
 	public void updateJhwj(){
@@ -280,14 +302,16 @@ public class WjglController extends BaseActionSupport{
 		}
 	}
 	public void selectqtwjlist(){
-		wjgl.setJsdw(gydw);
-		wjgl.setKssj(kssj);
-		wjgl.setJssj(jssj);
-		wjgl.setPage(page);
-		wjgl.setRows(rows);
-		List<Wjgl> list = wjglServer.selectqtwjlist(wjgl);
-		int count = wjglServer.selectqtwjlistCount(wjgl);
-		EasyUIPage<Wjgl> e=new EasyUIPage<Wjgl>();
+		gcda.setXmmc(xmmc);
+		gcda.setDamc(damc);
+		gcda.setBzdw(bzdw);
+		gcda.setKssj(kssj);
+		gcda.setJssj(jssj);
+		gcda.setPage(page);
+		gcda.setRows(rows);
+		List<Gcda> list = wjglServer.selectqtwjlist(gcda);
+		int count = wjglServer.selectqtwjlistCount(gcda);
+		EasyUIPage<Gcda> e=new EasyUIPage<Gcda>();
 		e.setRows(list);
 		e.setTotal(count);
 		try {
@@ -356,74 +380,6 @@ public class WjglController extends BaseActionSupport{
 			e.printStackTrace();
 		}
 	}
-	
-	/*public void downWjFile(){
-		try {
-			HttpServletResponse response = getresponse();
-			OutputStream out = new BufferedOutputStream(response.getOutputStream());
-			response.setContentType("multipart/form-data");
-			wjgl.setId(id);
-			Wjgl wjgl1=wjglServer.selectWjById(wjgl);
-			//byte[] data = wjgl1.getWjfile();
-			//String realPath = ServletActionContext.getServletContext().getRealPath("/");
-			//String filename=wjgl1.getWjname();
-			response.addHeader("Content-Disposition", "attachment;filename="+ new String(filename.getBytes("gb2312"), "ISO-8859-1"));
-			File file=new File(realPath+wjgl1.getWjname());
-			if (!file.exists()) { 
-	            file.createNewFile(); // 如果文件不存在，则创建 
-	        } 
-			FileOutputStream fos = new FileOutputStream(file); 
-			 InputStream in = new InputStream() {
-				@Override
-				public int read() throws IOException {
-					// TODO Auto-generated method stub
-					return 0;
-				}
-			}; 
-		        int size = 0; 
-		        if (data.length > 0) { 
-		            fos.write(data, 0, data.length); 
-		        } else { 
-		            while ((size = in.read(data)) != -1) { 
-		                fos.write(data, 0, size); 
-		            }  
-		        } 
-			FileInputStream fis= new FileInputStream(file);
-			byte [] arr = new byte[1024*10];
-			int i;
-			while((i=fis.read(arr))!=-1){
-				out.write(arr,0,i);
-				out.flush();
-			}
-			fis.close();
-			out.close();
-			file.delete();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public InputStream getDownloadFile()
-	{
-		System.out.println(xmid+"---------");
-		MyFile my=new MyFile();
-		my.setXmid(xmid);
-		List<MyFile> files=fileserver.selectFiles(my);
-		MyFile mf = files.get(0);
-		this.realName = mf.getRealName();
-		String fileName = mf.getFileName();
-		
-		//InputStream in= ServletActionContext.getServletContext().getResourceAsStream("/"+PropertiesReader.getInstance().getFileUrl().trim()+"/" + "附件.rar");
-		File file=new File(PropertiesReader.getInstance().getFileUrl().trim()+"/" + fileName);
-		System.out.println("PropertiesReader.getInstance().getFileUrl()::::" +PropertiesReader.getInstance().getFileUrl().trim()+"/" + fileName);
-		InputStream in=null;
-		try {
-			in = new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return in;   
-	}*/
 	
 	private byte [] inputStreamToByte(InputStream is) throws IOException { 
 	    ByteArrayOutputStream bAOutputStream = new ByteArrayOutputStream(); 

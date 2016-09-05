@@ -23,50 +23,14 @@
 		#righttop{height:33px;background:url(${pageContext.request.contextPath}/images/righttopbg.gif) 0 0 repeat-x;}
 	</style>
 	<script type="text/javascript">
-		$(function(){
-			var date=new Date();
-			var y = date.getFullYear();
-			var m = date.getMonth()+1;
-			var d = date.getDate(); 
-			var m1;
-			var y1;
-			if(m==1){
-				m1=12;
-				y1=y-1;
-			}else{
-				m1=m-1;
-				y1=y;
-			}
-			if(m<=9){
-				m='0'+m;
-			}
-			if(m1<=9){
-				m1='0'+m1;
-			}
-			if(d<=9){
-				d='0'+d;
-			}
-			$("#kssj").datebox({    
-			    
-			});  
-			$("#jssj").datebox({    
-		    
-			});  
-			$('#jssj').datebox('setValue',  y+"-"+m+"-"+d);
-			if(m1==4||m1==6||m1==9||m1==11){
-				if(d==31){
-					d=30;
-				}
-			}
-			if(m1==2){
-				if(d==29||d==30||d==31){
-					d=28
-				}
-			}
-			$('#kssj').datebox('setValue', y1+"-"+m1+"-"+d);
-			
-			showAll();
-		});
+	$(function(){
+		$("#kssj").datebox({    
+		});  
+		$("#jssj").datebox({    
+		});  
+		showAll();
+	});
+	
 		
 		function showAll(){
 			var gydw=$.cookie("unit");
@@ -80,24 +44,32 @@
 			    rownumbers:true,
 			    pageNumber:1,
 			    pageSize:10,
-			    height:$(window).height()-$(window).height()*0.22,
+			    height:$(window).height()-$(window).height()*0.25,
 			    width:$(window).width()-$(window).width()*0.016,
 			    queryParams: {
-			    	gydw: gydw,
+			    	xmmc: $("#xmmc").val(),
+			    	damc: $("#damc").val(),
+			    	bzdw: $("#bzdw").val(),
 			    	kssj:kssj,
 			    	jssj:jssj
 				},
 			    columns:[[
 			        {field:'c',title:'操作',width:150,align:'center',formatter:function(value,row,index){
-			        	if(row.fbdw==$.cookie("unit"))
-			        		//+'<a style="text-decoration:none;color:#3399CC;" href="#" onclick="editwj('+index+')">编辑</a>        '
-			        	return '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    '+'<a style="text-decoration:none;color:#3399CC;" href="#" onclick="deletewj('+index+')">删除</a>        ';
-			        	else	 return '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    ';
+			        	//if(row.fbdw==$.cookie("unit"))
+			        		return'<a style="text-decoration:none;color:#3399CC;" href="#" onclick="editwj('+index+')">编辑</a>    '+
+			        	 '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    '+
+			        	 '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="deletewj('+index+')">删除</a>    '+
+			        	 '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="deletewj('+index+')">状态记录</a>';
+			        	//else	 return '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    ';
 			        }},
-			        {field:'wjmc',title:'文件名称',width:600,align:'center'},
-			        /* {field:'wjgy',title:'文件概要',width:1000,align:'center'}, */
-			        {field:'fbr',title:'发布人',width:200,align:'center'},
-			        {field:'fbsj',title:'发布时间',width:96,align:'center'}
+			        {field:'xmmc',title:'项目名称',width:100,align:'center'},
+			        {field:'damc',title:'文件名称',width:100,align:'center'},
+			        {field:'bzdw',title:'编制单位',width:200,align:'center'},
+			        {field:'lb',title:'类别',width:100,align:'center'},
+			        {field:'rq',title:'日期',width:100,align:'center'},
+			        {field:'cs',title:'册数',width:50,align:'center'},
+			        {field:'cfwz',title:'存放位置',width:50,align:'center'},
+			        {field:'bz',title:'备注',width:200,align:'center'}
 			    ]]    
 			}); 
 		}
@@ -107,7 +79,7 @@
 			var weatherDlg = new J.dialog( {
 				id : 'id2',
 				title : '工程档案添加',
-				page : 'gcda_add.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=qtwj.jsp'+'&id='+new Date().getTime(),
+				page : 'gcda_add.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=gcda.jsp'+'&id='+new Date().getTime(),
 				width : 570,
 				height : 340,
 				top : 0,
@@ -125,7 +97,7 @@
 			var weatherDlg = new J.dialog( {
 				id : 'id2',
 				title : '工程档案编辑',
-				page : 'gcda_xg.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=qtwj.jsp'+'&id='+data.id,
+				page : 'gcda_xg.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=gcda.jsp'+'&id='+data.id,
 				width : 570,
 				height : 340,
 				top : 0,
@@ -200,13 +172,17 @@ a:active {
         				</legend>
         				<div>
         					<p style="margin: 1% 0px 1% 2%;">
-        						<span>发布时间：</span>
+        						<span>文件时间：</span>
         							<input type="text" id="kssj" >
         							<span>至</span>
         							<input type="text" id="jssj" >
-        							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        							&nbsp;&nbsp;&nbsp;&nbsp;
+									 <span>项目名称：</span>
+        							 <input class="combo-text validatebox-text" id="xmmc" style="width: 113px; height: 20px; line-height: 20px;" type="text">
+        							 <span>档案名称：</span>
+        							 <input class="combo-text validatebox-text" id="damc" style="width: 113px; height: 20px; line-height: 20px;" type="text">
+									 <span>编制单位：</span>
+        							 <input class="combo-text validatebox-text" id="bzdw" style="width: 113px; height: 20px; line-height: 20px;" type="text">
 <%-- 									<input type="image" name="btnSelect" id="btnSelect" onmouseover="this.src='${pageContext.request.contextPath}/images/Button/Serch02.gif'" alt="查询" onmouseout="this.src='${pageContext.request.contextPath}/images/Button/Serch01.gif'" src="${pageContext.request.contextPath}/images/Button/Serch01.gif" style="border-width:0px;cursor: hand;" /> --%>
                                     <img alt="查询" src="${pageContext.request.contextPath}/images/Button/Serch01.gif" onmouseover="this.src='${pageContext.request.contextPath}/images/Button/Serch02.gif'"
                                         onmouseout="this.src='${pageContext.request.contextPath}/images/Button/Serch01.gif' "  style="border-width:0px;cursor: hand;vertical-align: middle;" onclick="showAll()"/>

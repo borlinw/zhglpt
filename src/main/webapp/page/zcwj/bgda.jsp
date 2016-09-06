@@ -23,9 +23,14 @@
 		#righttop{height:33px;background:url(${pageContext.request.contextPath}/images/righttopbg.gif) 0 0 repeat-x;}
 	</style>
 	<script type="text/javascript">
-		$(function(){
-			showAll();
-		});
+	$(function(){
+		$("#kssj").datebox({    
+		});  
+		$("#jssj").datebox({    
+		});  
+		showAll();
+	});
+	
 		
 		function showAll(){
 			var gydw=$.cookie("unit");
@@ -39,33 +44,48 @@
 			    rownumbers:true,
 			    pageNumber:1,
 			    pageSize:10,
-			    height:$(window).height()-$(window).height()*0.22,
+			    height:$(window).height()-$(window).height()*0.25,
 			    width:$(window).width()-$(window).width()*0.016,
 			    queryParams: {
-			    	gydw: gydw,
+			    	xmmc: $("#xmmc").val(),
+			    	damc: $("#damc").val(),
+			    	bzdw: $("#bzdw").val(),
 			    	kssj:kssj,
 			    	jssj:jssj
 				},
 			    columns:[[
 			        {field:'c',title:'操作',width:150,align:'center',formatter:function(value,row,index){
-			        	if(row.fbdw==$.cookie("unit"))
-			        		//+'<a style="text-decoration:none;color:#3399CC;" href="#" onclick="editwj('+index+')">编辑</a>        '
-			        	return '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    '+'<a style="text-decoration:none;color:#3399CC;" href="#" onclick="deletewj('+index+')">删除</a>        ';
-			        	else	 return '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    ';
+			        	//if(row.fbdw==$.cookie("unit"))
+			        		return'<a style="text-decoration:none;color:#3399CC;" href="#" onclick="editwj('+index+')">编辑</a>    '+
+			        	 '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    '+
+			        	 '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="deletewj('+index+')">删除</a>    '+
+			        	 '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ztjl('+index+')">状态记录</a>';
+			        	//else	 return '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    ';
 			        }},
-			        {field:'wjmc',title:'文件名称',width:600,align:'center'},
-			        /* {field:'wjgy',title:'文件概要',width:1000,align:'center'}, */
-			        {field:'fbr',title:'发布人',width:200,align:'center'},
-			        {field:'fbsj',title:'发布时间',width:96,align:'center'}
+			        {field:'xmmc',title:'项目名称',width:100,align:'center'},
+			        {field:'damc',title:'文件名称',width:100,align:'center'},
+			        {field:'bzdw',title:'编制单位',width:200,align:'center'},
+			        {field:'lb',title:'类别',width:100,align:'center'},
+			        {field:'rq',title:'日期',width:100,align:'center'},
+			        {field:'cs',title:'册数',width:50,align:'center'},
+			        {field:'cfwz',title:'存放位置',width:50,align:'center'},
+			        {field:'bz',title:'备注',width:200,align:'center'}
 			    ]]    
 			}); 
 		}
 		
+		//状态记录
+		function ztjl(index){
+
+			var data=$("#datagrid").datagrid('getRows')[index];
+			obj=data;
+			YMLib.UI.createWindow('bgda_ztjl','状态记录',"/zhglpt/page/zcwj/bgda_ztjl.jsp",'bgda_ztjl',1000,400);
+		}
 		//添加
 		function xxtztj(){
 			var weatherDlg = new J.dialog( {
 				id : 'id2',
-				title : '办公室档案添加',
+				title : '工程档案添加',
 				page : 'bgda_add.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=bgda.jsp'+'&id='+new Date().getTime(),
 				width : 570,
 				height : 340,
@@ -83,7 +103,7 @@
 			obj=data;
 			var weatherDlg = new J.dialog( {
 				id : 'id2',
-				title : '办公室档案编辑',
+				title : '工程档案编辑',
 				page : 'bgda_xg.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=bgda.jsp'+'&id='+data.id,
 				width : 570,
 				height : 340,
@@ -102,7 +122,7 @@
 			$.ajax({
 				type:'post',
 				url:'/zhglpt/wjxt/deleteJhwj.do',
-				data:"wjgl.id="+data.id,
+				data:"wjgl.wjid="+data.id+"&wjgl.id="+data.id,
 				dataType:'json',
 				async:false,
 				success:function(msg){
@@ -121,8 +141,21 @@
 		function ckwj(index){
 			var data=$("#datagrid").datagrid('getRows')[index];
 			obj=data;
-			YMLib.UI.createWindow('zcwj','办公室档案详情','bgda_ck.jsp','zcwj',730,300);
+			var weatherDlg = new J.dialog( {
+				id : 'id2',
+				title : '工程档案编辑',
+				page : 'bgda_ck.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=bgda.jsp'+'&id='+data.id,
+				width : 570,
+				height : 340,
+				top : 0,
+				rang : true,
+				resize : false,
+				cover : true
+			});
+			weatherDlg.ShowDialog();
+			return false;
 		}
+		
 	</script>
 	<style type="text/css">
 <!--
@@ -159,13 +192,17 @@ a:active {
         				</legend>
         				<div>
         					<p style="margin: 1% 0px 1% 2%;">
-        						<span>发布时间：</span>
+        						<span>文件时间：</span>
         							<input type="text" id="kssj" >
         							<span>至</span>
         							<input type="text" id="jssj" >
-        							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        							&nbsp;&nbsp;&nbsp;&nbsp;
+									 <span>项目名称：</span>
+        							 <input class="combo-text validatebox-text" id="xmmc" style="width: 113px; height: 20px; line-height: 20px;" type="text">
+        							 <span>档案名称：</span>
+        							 <input class="combo-text validatebox-text" id="damc" style="width: 113px; height: 20px; line-height: 20px;" type="text">
+									 <span>编制单位：</span>
+        							 <input class="combo-text validatebox-text" id="bzdw" style="width: 113px; height: 20px; line-height: 20px;" type="text">
 <%-- 									<input type="image" name="btnSelect" id="btnSelect" onmouseover="this.src='${pageContext.request.contextPath}/images/Button/Serch02.gif'" alt="查询" onmouseout="this.src='${pageContext.request.contextPath}/images/Button/Serch01.gif'" src="${pageContext.request.contextPath}/images/Button/Serch01.gif" style="border-width:0px;cursor: hand;" /> --%>
                                     <img alt="查询" src="${pageContext.request.contextPath}/images/Button/Serch01.gif" onmouseover="this.src='${pageContext.request.contextPath}/images/Button/Serch02.gif'"
                                         onmouseout="this.src='${pageContext.request.contextPath}/images/Button/Serch01.gif' "  style="border-width:0px;cursor: hand;vertical-align: middle;" onclick="showAll()"/>

@@ -37,8 +37,8 @@
 		values(#{id},#{xmmc},#{damc},#{bzdw},#{lb},#{rq},#{cs},#{bz},#{cfwz})
 	</insert>
 	<insert id="insertJhwj" parameterType="wjgl">
-		insert into ZCWJ_JHWJ(id,fbsj,fbr,wjmc,wjgy,fbdw)
-		values(#{id},to_char(sysdate,'yyyy-mm-dd'),#{fbr},#{wjmc},#{wjgy},#{fbdw})
+		insert into ZCWJ_bgda(id,xmmc,damc,bzdw,lb,rq,cs,bz,cfwz)
+		values(#{id},#{xmmc},#{damc},#{bzdw},#{lb},#{rq},#{cs},#{bz},#{cfwz})
 	</insert>
 	<insert id="addGcdaZtjl" parameterType="gcdaZtjl">
 		insert into GCDA_ZTJL(id,DAID,JCR,JCSJ,JCLXDH,GHR,GHSJ,GHLXDH,BZ)
@@ -58,7 +58,7 @@
 		where id=#{id}
 	</update>
 	<update id="updateJhwj" parameterType="wjgl">
-		update ZCWJ_JHWJ set wjmc=#{wjmc},wjgy=#{wjgy}
+		update ZCWJ_BGDA set xmmc=#{xmmc},damc=#{damc},bzdw=#{bzdw},lb=#{lb},rq=#{rq},cs=#{cs},bz=#{bz},cfwz=#{cfwz}
 		where id=#{id}
 	</update>
 	<delete id="deleteZcwj" parameterType="wjgl">
@@ -68,7 +68,7 @@
 		delete from ZCWJ_gcda where id=#{id}
 	</delete>
 	<delete id="deleteJhwj" parameterType="wjgl">
-		delete from ZCWJ_JHWJ where id=#{id}
+		delete from ZCWJ_BGDA where id=#{id}
 	</delete>
 	<delete id="delGcdaZtjlById" parameterType="gcdaZtjl">
 		delete from gcda_ztjl where id=#{id}
@@ -159,32 +159,50 @@
 					<![CDATA[and to_date(rq,'yyyy-mm-dd') <= to_date(#{jssj},'yyyy-mm-dd')]]>
 			</if>
 	</select>
-	<select id="selectjhwjlist" parameterType="wjgl" resultType="wjgl">
+	<select id="selectjhwjlist" parameterType="bgda" resultType="bgda">
 		select * from (
 		select m.*,rownum rn from (
-			select * from ZCWJ_JHWJ 
+			select * from ZCWJ_bgda 
 			where 1=1
+			<if test="xmmc != null and  xmmc != ''">
+			and xmmc like '%'||#{xmmc}||'%' 
+			</if>
+			<if test="damc != null and  damc != ''">
+			and damc like '%'||#{damc}||'%' 
+			</if>
+			<if test="bzdw != null and  bzdw != ''">
+			and bzdw like '%'||#{bzdw}||'%' 
+			</if>
 			<if test="kssj != null  and kssj != ''">
-					and to_date(fbsj,'yyyy-mm-dd') >= to_date(#{kssj},'yyyy-mm-dd')
+					and to_date(rq,'yyyy-mm-dd') >= to_date(#{kssj},'yyyy-mm-dd')
 			</if>
 			<if test="jssj != null and jssj != ''">
-					<![CDATA[and to_date(fbsj,'yyyy-mm-dd') <= to_date(#{jssj},'yyyy-mm-dd')]]>
+					<![CDATA[and to_date(rq,'yyyy-mm-dd') <= to_date(#{jssj},'yyyy-mm-dd')]]>
 			</if>
-		order by fbsj desc
+		order by xmmc,rq desc
 		)  m
 			where <![CDATA[rownum<=(#{page} * #{rows})]]>
 		) 
 			where RN>((#{page} - 1) * #{rows})
 		
 	</select>
-	<select id="selectjhwjlistCount" parameterType="wjgl" resultType="int">
-		select count(*) from ZCWJ_JHWJ 
+	<select id="selectjhwjlistCount" parameterType="bgda" resultType="int">
+		select count(*) from ZCWJ_bgda 
 			where 1=1
+			<if test="xmmc != null and  xmmc != ''">
+			and xmmc like '%'||#{xmmc}||'%' 
+			</if>
+			<if test="damc != null and  damc != ''">
+			and damc like '%'||#{damc}||'%' 
+			</if>
+			<if test="bzdw != null and  bzdw != ''">
+			and bzdw like '%'||#{bzdw}||'%' 
+			</if>
 			<if test="kssj != null  and kssj != ''">
-					and to_date(fbsj,'yyyy-mm-dd') >= to_date(#{kssj},'yyyy-mm-dd')
+					and to_date(rq,'yyyy-mm-dd') >= to_date(#{kssj},'yyyy-mm-dd')
 			</if>
 			<if test="jssj != null and jssj != ''">
-					<![CDATA[and to_date(fbsj,'yyyy-mm-dd') <= to_date(#{jssj},'yyyy-mm-dd')]]>
+					<![CDATA[and to_date(rq,'yyyy-mm-dd') <= to_date(#{jssj},'yyyy-mm-dd')]]>
 			</if>
 	</select>
 	

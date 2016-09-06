@@ -26,6 +26,7 @@ import com.hdsx.zhglpt.file.controller.PropertiesReader;
 import com.hdsx.zhglpt.utile.EasyUIPage;
 import com.hdsx.zhglpt.utile.JsonUtils;
 import com.hdsx.zhglpt.utile.ResponseUtils;
+import com.hdsx.zhglpt.wjxt.bean.Bgda;
 import com.hdsx.zhglpt.wjxt.bean.FileUrl;
 import com.hdsx.zhglpt.wjxt.bean.GcdaZtjl;
 import com.hdsx.zhglpt.wjxt.bean.Wjgl;
@@ -50,6 +51,7 @@ public class WjglController extends BaseActionSupport{
 	private WjglServer wjglServer;
 	private Wjgl wjgl=new Wjgl();
 	private Gcda gcda=new Gcda();
+	private Bgda bgda=new Bgda();
 	private String id;
 	private String fileuploadFileName;
 	private File fileupload;
@@ -178,8 +180,12 @@ public class WjglController extends BaseActionSupport{
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
-	
-	
+	public Bgda getBgda() {
+		return bgda;
+	}
+	public void setBgda(Bgda bgda) {
+		this.bgda = bgda;
+	}
 	public void queryZtjlByDaId(){
 		try {
 			JsonUtils.write(wjglServer.queryZjxdById(gcdaZtjl), getresponse().getWriter());
@@ -292,7 +298,7 @@ public class WjglController extends BaseActionSupport{
 		ResponseUtils.write(getresponse(), bl+"");
 	}
 	public void insertJhwj(){
-		boolean bl=wjglServer.insertJhwj(wjgl);
+		boolean bl=wjglServer.insertJhwj(bgda);
 		ResponseUtils.write(getresponse(), bl+"");
 	}
 	public void updateZcwj(){
@@ -305,7 +311,7 @@ public class WjglController extends BaseActionSupport{
 		ResponseUtils.write(getresponse(), bl+"");
 	}
 	public void updateJhwj(){
-		boolean bl=wjglServer.updateJhwj(wjgl);
+		boolean bl=wjglServer.updateJhwj(bgda);
 		ResponseUtils.write(getresponse(), bl+"");
 	}
 	public void deleteZcwj(){
@@ -331,6 +337,13 @@ public class WjglController extends BaseActionSupport{
 		ResponseUtils.write(getresponse(), bl+"");
 	}
 	public void deleteJhwj(){
+		List<Wjgl> list = wjglServer.selectWjfile(wjgl);
+		for(Wjgl l:list){
+			File file =new File(l.getFileurl(), l.getWjname());
+			boolean have=file.exists();
+			if(have)			
+				file.delete();
+		}
 		boolean bl=wjglServer.deleteJhwj(wjgl);
 		ResponseUtils.write(getresponse(), bl+"");
 	}
@@ -373,14 +386,16 @@ public class WjglController extends BaseActionSupport{
 	}
 	
 	public void selectjhwjlist(){
-		wjgl.setJsdw(gydw);
-		wjgl.setKssj(kssj);
-		wjgl.setJssj(jssj);
-		wjgl.setPage(page);
-		wjgl.setRows(rows);
-		List<Wjgl> list = wjglServer.selectjhwjlist(wjgl);
-		int count = wjglServer.selectjhwjlistCount(wjgl);
-		EasyUIPage<Wjgl> e=new EasyUIPage<Wjgl>();
+		bgda.setXmmc(xmmc);
+		bgda.setDamc(damc);
+		bgda.setBzdw(bzdw);
+		bgda.setKssj(kssj);
+		bgda.setJssj(jssj);
+		bgda.setPage(page);
+		bgda.setRows(rows);
+		List<Bgda> list = wjglServer.selectjhwjlist(bgda);
+		int count = wjglServer.selectjhwjlistCount(bgda);
+		EasyUIPage<Bgda> e=new EasyUIPage<Bgda>();
 		e.setRows(list);
 		e.setTotal(count);
 		try {

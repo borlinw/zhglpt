@@ -150,11 +150,10 @@
 		var data= "bgda.xmmc="+$("#xmmc").val()+"&bgda.damc="+$("#damc").val()+"&bgda.bzdw="+$("#bzdw").val()
 		+"&bgda.lb="+$("#lb").val()+"&bgda.cs="+$("#cs").val()+"&bgda.bz="+$("#bz").val()
 		+"&bgda.cfwz="+$("#cfwz").val()
-		+"&bgda.id="+request('id')+"&bgda.rq="+$("input[name='rq']").val();
-		//alert(data);
+		+"&bgda.id="+request('id')+"&bgda.rq="+$("input[name='rp']").val();
 		$.ajax({
 				type:'post',
-				url:'/zhglpt/wjxt/insertJhwj.do',
+				url:'/zhglpt/wjxt/updateJhwj.do',
 				data:data,
 				dataType:'json',
 				async:false,
@@ -200,8 +199,32 @@
 // 			setTime('closeck()',1000);
 // 		}
 // 	}
-	$(function(){
-		//setGydw("jsdw","36");
+
+		$(function(){
+		var data=parent.obj;
+		$("#xmmc").val(data.xmmc);
+		$("#damc").val(data.damc);
+		$("#bzdw").val(data.bzdw);
+		$("#lb").val(data.lb);
+		$("#rq").val(data.rq);
+		$("#cs").val(data.cs);
+		$("#bz").val(data.bz);
+		$("#cfwz").val(data.cfwz);
+		var data1="id="+data.id;
+		$.ajax({
+			type:'post',
+			url:'/zhglpt/wjxt/selectWjfile.do',
+			data:data1,
+			dataType:'json',
+			success:function(msg){
+				if(msg.length==0){
+					$('<li></li>').appendTo('.files').html("无附件");
+				}
+				for(var i=0;i<msg.length;i++)  
+				$('<li></li>').appendTo('.files').html(msg[i].wjname+'                 <a id="'+msg[i].id+'" href="javascript:DelTz('+"'"+msg[i].id+"'"+')"  style="text-decoration:none;"> 删除 </a> '  );
+			}
+		});	
+		
 		$("#rq").datebox({    
 		});  
 		var data1="yhdw="+$.cookie("unit");
@@ -237,11 +260,11 @@
 	}
 	function DelTz(str){
 //		alert(str);
-		var data="wjgl.id="+str;
+		var data="wjgl.wjid="+str+"&wjgl.id="+str;
 		if(confirm("确认删除吗？")){
 			$.ajax({
 				type:'post',
-				url:'/zhglpt/wjxt/deleteWjfile.do',
+				url:'/zhglpt/wjxt/deletegcdafile.do',
 				data:data,
 				dataType:'json',
 				success:function(msg){
@@ -320,7 +343,7 @@
                                 </td>
                                 <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
                                     border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
-                                 <input type="text" id="rq" name="rq" style="width: 300px;">
+                                 <input type="text" id="rq" name="rp" style="width: 300px;">
                                 </td>
                             </tr>
                             <tr style="height: 35px;">

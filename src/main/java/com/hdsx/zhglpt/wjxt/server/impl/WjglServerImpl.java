@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.hdsx.dao.query.base.BaseOperate;
+import com.hdsx.zhglpt.wjxt.bean.Bgda;
 import com.hdsx.zhglpt.wjxt.bean.Gcda;
 import com.hdsx.zhglpt.wjxt.bean.GcdaZtjl;
 import com.hdsx.zhglpt.wjxt.bean.Wjgl;
@@ -86,7 +87,7 @@ public class WjglServerImpl extends BaseOperate implements WjglServer {
 	}
 
 	
-	public boolean insertJhwj(Wjgl wjgl) {
+	public boolean insertJhwj(Bgda wjgl) {
 		return insert("insertJhwj", wjgl)==1;
 	}
 	
@@ -114,8 +115,8 @@ public class WjglServerImpl extends BaseOperate implements WjglServer {
 	}
 
 	
-	public boolean updateJhwj(Wjgl wjgl) {
-		return update("updateQtwj", wjgl)==1;
+	public boolean updateJhwj(Bgda wjgl) {
+		return update("updateJhwj", wjgl)==1;
 	}
 	
 	
@@ -128,12 +129,12 @@ public class WjglServerImpl extends BaseOperate implements WjglServer {
 	}
 
 	
-	public List<Wjgl> selectjhwjlist(Wjgl wjgl) {
+	public List<Bgda> selectjhwjlist(Bgda wjgl) {
 		return queryList("selectjhwjlist",wjgl);
 	}
 
 	
-	public int selectjhwjlistCount(Wjgl wjgl) {
+	public int selectjhwjlistCount(Bgda wjgl) {
 		return queryOne("selectjhwjlistCount", wjgl);
 	}
 

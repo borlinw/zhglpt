@@ -9,7 +9,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -25,6 +27,7 @@ import com.hdsx.zhglpt.utile.EasyUIPage;
 import com.hdsx.zhglpt.utile.JsonUtils;
 import com.hdsx.zhglpt.utile.ResponseUtils;
 import com.hdsx.zhglpt.wjxt.bean.FileUrl;
+import com.hdsx.zhglpt.wjxt.bean.GcdaZtjl;
 import com.hdsx.zhglpt.wjxt.bean.Wjgl;
 import com.hdsx.zhglpt.wjxt.server.WjglServer;
 import com.hdsx.webutil.struts.BaseActionSupport;
@@ -92,8 +95,16 @@ public class WjglController extends BaseActionSupport{
 	private String wjtype;
 	private String wjid;
 	private String wjgy;
+	private GcdaZtjl gcdaZtjl;
 	
 	
+	
+	public GcdaZtjl getGcdaZtjl() {
+		return gcdaZtjl;
+	}
+	public void setGcdaZtjl(GcdaZtjl gcdaZtjl) {
+		this.gcdaZtjl = gcdaZtjl;
+	}
 	public String getWjgy() {
 		return wjgy;
 	}
@@ -166,6 +177,28 @@ public class WjglController extends BaseActionSupport{
 	}
 	public void setRows(int rows) {
 		this.rows = rows;
+	}
+	
+	
+	public void queryZtjlByDaId(){
+		try {
+			JsonUtils.write(wjglServer.queryZjxdById(gcdaZtjl), getresponse().getWriter());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void addGcdaZtjl(){
+		boolean bl=wjglServer.addGcdaZtjl(gcdaZtjl);
+		ResponseUtils.write(getresponse(), bl+"");
+	}
+	public void delGcdaZtjlById(){
+		boolean bl=wjglServer.delGcdaZtjlById(gcdaZtjl);
+		ResponseUtils.write(getresponse(), bl+"");
+	}
+	
+	public void editGcdaZtjl(){
+		boolean bl=wjglServer.editGcdaZtjl(gcdaZtjl);
+		ResponseUtils.write(getresponse(), bl+"");
 	}
 	
 	public void uploadWjFile() throws IOException{

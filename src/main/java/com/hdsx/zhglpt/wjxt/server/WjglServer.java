@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.hdsx.zhglpt.wjxt.bean.Gcda;
+import com.hdsx.zhglpt.wjxt.bean.GcdaZtjl;
 import com.hdsx.zhglpt.wjxt.bean.Wjgl;
 
 public interface WjglServer {
@@ -17,7 +18,8 @@ public interface WjglServer {
 	boolean insertZcwj(Wjgl wjgl);
 
 	List<Wjgl> selectzcwjlist(Wjgl wjgl);
-
+	
+	List<GcdaZtjl> queryZjxdById(GcdaZtjl gcdaZtjl);
 	int selectzcwjlistCount(Wjgl wjgl);
 
 	List<Wjgl> selectWjfile(Wjgl wjgl);
@@ -30,6 +32,10 @@ public interface WjglServer {
 	boolean deleteZcwj(Wjgl wjgl);
 
 	boolean insertQtwj(Gcda wjgl);
+	boolean addGcdaZtjl(GcdaZtjl gcdaZtjl);
+	boolean delGcdaZtjlById(GcdaZtjl gcdaZtjl);
+	boolean editGcdaZtjl(GcdaZtjl gcdaZtjl);
+	
 
 	List<Gcda> selectqtwjlist(Gcda wjgl);
 

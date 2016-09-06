@@ -14,6 +14,11 @@
 	<delete id="deleteWjfile" parameterType="wjgl" >
 		delete from zcwj_file where id=#{id}
 	</delete>
+	
+	<select id="queryZjxdById" parameterType="gcdaZtjl" resultType="gcdaZtjl">
+		select * from gcda_Ztjl where daid=#{daid}
+	</select>
+	
 	<select id="selectzcwjbyid" parameterType="string" resultType="wjgl">
 		select * from ZCWJ_ZCWJ where id=#{value}
 	</select>
@@ -35,6 +40,15 @@
 		insert into ZCWJ_JHWJ(id,fbsj,fbr,wjmc,wjgy,fbdw)
 		values(#{id},to_char(sysdate,'yyyy-mm-dd'),#{fbr},#{wjmc},#{wjgy},#{fbdw})
 	</insert>
+	<insert id="addGcdaZtjl" parameterType="gcdaZtjl">
+		insert into GCDA_ZTJL(id,DAID,JCR,JCSJ,JCLXDH,GHR,GHSJ,GHLXDH,BZ)
+		values(SYS_GUID(),#{daid},#{jcr},#{jcsj},#{jclxdh},#{ghr},#{ghsj},#{ghlxdh},#{bz})
+	</insert>
+	<update id="editGcdaZtjl" parameterType="gcdaZtjl">
+		update GCDA_ZTJL set JCR=#{jcr},JCSJ=#{jcsj},JCLXDH=#{jclxdh},GHR=#{ghr},GHSJ=#{ghsj},GHLXDH=#{ghlxdh},BZ=#{bz}
+		where id=#{id}
+	</update>
+	
 	<update id="updateZcwj" parameterType="wjgl">
 		update ZCWJ_ZCWJ set wjmc=#{wjmc},wjgy=#{wjgy},jsdw=#{jsdw}
 		where id=#{id}
@@ -55,6 +69,9 @@
 	</delete>
 	<delete id="deleteJhwj" parameterType="wjgl">
 		delete from ZCWJ_JHWJ where id=#{id}
+	</delete>
+	<delete id="delGcdaZtjlById" parameterType="gcdaZtjl">
+		delete from gcda_ztjl where id=#{id}
 	</delete>
 	<select id="selectzcwjlist" parameterType="wjgl" resultType="wjgl">
 		select * from (

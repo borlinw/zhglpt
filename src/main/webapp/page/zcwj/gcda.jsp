@@ -59,7 +59,7 @@
 			        		return'<a style="text-decoration:none;color:#3399CC;" href="#" onclick="editwj('+index+')">编辑</a>    '+
 			        	 '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    '+
 			        	 '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="deletewj('+index+')">删除</a>    '+
-			        	 '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="deletewj('+index+')">状态记录</a>';
+			        	 '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ztjl('+index+')">状态记录</a>';
 			        	//else	 return '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    ';
 			        }},
 			        {field:'xmmc',title:'项目名称',width:100,align:'center'},
@@ -74,6 +74,13 @@
 			}); 
 		}
 		
+		//状态记录
+		function ztjl(index){
+
+			var data=$("#datagrid").datagrid('getRows')[index];
+			obj=data;
+			YMLib.UI.createWindow('gcda_ztjl','状态记录',"/zhglpt/page/zcwj/gcda_ztjl.jsp",'gcda_ztjl',1000,400);
+		}
 		//添加
 		function xxtztj(){
 			var weatherDlg = new J.dialog( {

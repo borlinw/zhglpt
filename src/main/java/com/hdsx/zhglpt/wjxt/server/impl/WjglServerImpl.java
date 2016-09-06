@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.hdsx.dao.query.base.BaseOperate;
 import com.hdsx.zhglpt.wjxt.bean.Gcda;
+import com.hdsx.zhglpt.wjxt.bean.GcdaZtjl;
 import com.hdsx.zhglpt.wjxt.bean.Wjgl;
 import com.hdsx.zhglpt.wjxt.server.WjglServer;
 
@@ -145,5 +146,26 @@ public class WjglServerImpl extends BaseOperate implements WjglServer {
 		return false;
 	}
 
+	public List<GcdaZtjl> queryZjxdById(GcdaZtjl gcdaZtjl) {
+		// TODO Auto-generated method stub
+		return queryList("queryZjxdById",gcdaZtjl);
+	}
+
+	public boolean addGcdaZtjl(GcdaZtjl gcdaZtjl) {
+		// TODO Auto-generated method stub
+		return insert("addGcdaZtjl", gcdaZtjl)==1;	
+		}
+
+	public boolean delGcdaZtjlById(GcdaZtjl gcdaZtjl) {
+		// TODO Auto-generated method stub
+		int i=delete("delGcdaZtjlById", gcdaZtjl);
+		System.out.println("i========"+i);
+		return i==1;
+	}
+
+	public boolean editGcdaZtjl(GcdaZtjl gcdaZtjl) {
+		// TODO Auto-generated method stub
+		return insert("editGcdaZtjl", gcdaZtjl)==1;	
+	}
 	
 }

@@ -22,6 +22,11 @@
 	<action name="selectWjfile" class="wjglController" method="selectWjfile"/>
 	<action name="downWjFile" class="wjglController" method="downWjFile"/>
 	<action name="deleteGcdafile" class="wjglController" method="deleteGcdafile"/>
+	<action name="queryZtjlByDaId" class="wjglController" method="queryZtjlByDaId"/>
+	<action name="addGcdaZtjl" class="wjglController" method="addGcdaZtjl"/>
+	<action name="delGcdaZtjlById" class="wjglController" method="delGcdaZtjlById"/>
+	<action name="editGcdaZtjl" class="wjglController" method="editGcdaZtjl"/>
+	
 	
 	
 	<action name="insertTrqk" class="trqkController" method="insertTrqk"/>

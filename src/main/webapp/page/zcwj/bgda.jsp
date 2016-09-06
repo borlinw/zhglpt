@@ -24,47 +24,6 @@
 	</style>
 	<script type="text/javascript">
 		$(function(){
-			/* var date=new Date();
-			var y = date.getFullYear();
-			var m = date.getMonth()+1;
-			var d = date.getDate(); 
-			var m1;
-			var y1;
-			if(m==1){
-				m1=12;
-				y1=y-1;
-			}else{
-				m1=m-1;
-				y1=y;
-			}
-			if(m<=9){
-				m='0'+m;
-			}
-			if(m1<=9){
-				m1='0'+m1;
-			}
-			if(d<=9){
-				d='0'+d;
-			}
-			$("#kssj").datebox({    
-			    
-			});  
-			$("#jssj").datebox({    
-		    
-			});  
-			$('#jssj').datebox('setValue',  y+"-"+m+"-"+d);
-			if(m1==4||m1==6||m1==9||m1==11){
-				if(d==31){
-					d=30;
-				}
-			}
-			if(m1==2){
-				if(d==29||d==30||d==31){
-					d=28
-				}
-			}
-			$('#kssj').datebox('setValue', y1+"-"+m1+"-"+d); */
-			
 			showAll();
 		});
 		

@@ -192,7 +192,7 @@ a:active {
 			<tr>
 			<td>
 			<div id="righttop">
-						<div id="p_top">当前位置>&nbsp;文件管理>&nbsp;政策文件</div>
+						<div id="p_top">当前位置>&nbsp;文件管理>&nbsp;制度文件</div>
 			</div>
 	           </td>
         	</tr>

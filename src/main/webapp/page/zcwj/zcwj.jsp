@@ -66,6 +66,7 @@
 			$('#kssj').datebox('setValue', y1+"-"+m1+"-"+d);
 			
 			showAll();
+			$(".pagination-page-list").css("width","4em");
 		});
 		
 		function showAll(){

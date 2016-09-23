@@ -161,6 +161,10 @@
 		uploadifyUpload();
 	}
 	function tianjia(){
+		if($("#fileQueue").text()==''){
+			alert("请添加上传文件");
+			return;
+		}
 		$("#message").html("正在上传，请勿关闭窗口！");
 		uploadifyUpload();
 		//addaqyb();

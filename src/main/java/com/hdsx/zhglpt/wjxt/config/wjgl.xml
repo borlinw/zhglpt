@@ -30,7 +30,7 @@
 	</delete>
 	<insert id="insertZcwj" parameterType="wjgl">
 		insert into ZCWJ_ZCWJ(id,fbsj,fbr,wjmc,wjgy,jsdw,fbdw)
-		values(#{id},to_char(sysdate,'yyyy-mm-dd'),#{fbr},#{wjmc},#{wjgy},#{jsdw},#{fbdw})
+		values(#{id},#{fbsj},#{fbr},#{wjmc},#{wjgy},#{jsdw},#{fbdw})
 	</insert>
 	<insert id="insertQtwj" parameterType="gcda">
 		insert into ZCWJ_gcda(id,xmmc,damc,bzdw,lb,rq,cs,bz,cfwz)

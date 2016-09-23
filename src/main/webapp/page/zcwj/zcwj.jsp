@@ -95,6 +95,7 @@
 				},
 			    columns:[[
 			        {field:'c',title:'操作',width:165,align:'center',formatter:function(value,row,index){
+			        	//alert($.cookie("unit")+"---"+row.fbdw);
 			        	if($.cookie("unit").substr(0,row.fbdw.length)==row.fbdw)
 			        		//+'<a style="text-decoration:none;color:#3399CC;" href="#" onclick="editwj('+index+')">编辑</a>        '
 			        	return '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    '+'<a style="text-decoration:none;color:#3399CC;" href="#" onclick="deletewj('+index+')">删除</a>        ';

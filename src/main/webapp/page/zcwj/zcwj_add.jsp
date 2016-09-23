@@ -127,6 +127,11 @@
 			alert("请添加文件名称");
 			return;
 		}
+		if($("input[name='fbsj']").val()==''){
+			alert("请添加发布时间");
+			return;
+		}
+		
 		/* 		if($("#wjgy").val()==''){
 			alert("请添加通知内容");
 			return;
@@ -135,7 +140,7 @@
 			return;
 		} */
 		var data= "wjgl.jsdw="+$("#fsdwmc").val()+"&wjgl.wjmc="+$("#wjmc").val()+"&wjgl.wjgy="+$("#wjgy").val()+"&wjgl.fbdw="+$.cookie("unit")
-		+"&wjgl.id="+request('id')+"&wjgl.fbr="+$.cookie("truename");
+		+"&wjgl.id="+request('id')+"&wjgl.fbr="+$.cookie("truename")+"&wjgl.fbsj="+$("input[name='fbsj']").val();
 		//alert(data);
 		$.ajax({
 				type:'post',
@@ -190,6 +195,8 @@
 	} */
 	$(function(){
 		/* setGydw("jsdw","36");*/
+		$("#fbsj").datebox({    
+		});  
 		var data1="yhdw="+$.cookie("unit"); 
 		$.ajax({
 			type:'post',
@@ -256,6 +263,17 @@
                                 <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
                                     border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
                                  <input type="text" id="wjmc"  style="width: 300px;">
+                                </td>
+                            </tr>
+                            <tr style="height: 35px;">
+                                <td style="border-style: none none solid none; border-width: 1px; border-color: #C0C0C0;
+                                    color: #007DB3; font-weight: bold; font-size: small; text-align: right; background-color: #F1F8FF;
+                                    padding-right: 5px; vertical-align: middle;">
+                                    <b><font color="#009ACD" style="font-size: 12px">发布时间 </font></b>
+                                </td>
+                                <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
+                                    border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
+                                 <input type="text" id="fbsj" name="fbsj"  style="width: 300px;">
                                 </td>
                             </tr>
                             <tr style="height: 35px;">

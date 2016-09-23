@@ -105,7 +105,7 @@ $(function(){
 								src="${pageContext.request.contextPath}/images/Button/baocun1.gif" style="border-width: 0px;" />
 								&nbsp; 
 								<input type="image" name="btnCancel" id="btnCancel" onmouseover="this.src='${pageContext.request.contextPath}/images/Button/fanhui2.GIF'" alt="返回"
-								onclick="parent.$('#zjxd').window('destroy');" onmouseout="this.src='${pageContext.request.contextPath}/images/Button/fanhui1.GIF'"
+								onclick="parent.$('#gcda_ztjl_add').window('destroy');" onmouseout="this.src='${pageContext.request.contextPath}/images/Button/fanhui1.GIF'"
 								src="${pageContext.request.contextPath}/images/Button/fanhui1.GIF" style="border-width: 0px;" />
 							</td>
 						</tr>

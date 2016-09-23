@@ -101,7 +101,7 @@ text-decoration:none;
 				<td colspan="6" style="background-color: #ffffff; height: 30px;"
 					align="center"><a href="javascript:addzjxd();" id="save_button"
 					class="easyui-linkbutton" plain="true" iconCls="icon-save">添加</a> <a
-					href="javascript:parent.$('#gcda_ztjl').window('destroy');" id="qx_window"
+					href="javascript:parent.$('#bgda_ztjl').window('destroy');" id="qx_window"
 					class="easyui-linkbutton" plain="true" iconCls="icon-cancel">返回</a></td>
 			</tr>
 		</table>

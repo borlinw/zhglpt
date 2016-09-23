@@ -150,7 +150,7 @@
 		var data= "gcda.xmmc="+$("#xmmc").val()+"&gcda.damc="+$("#damc").val()+"&gcda.bzdw="+$("#bzdw").val()
 		+"&gcda.lb="+$("#lb").val()+"&gcda.cs="+$("#cs").val()+"&gcda.bz="+$("#bz").val()
 		+"&gcda.cfwz="+$("#cfwz").val()
-		+"&gcda.id="+request('id')+"&gcda.rq="+$("#rq").val();
+		+"&gcda.id="+request('id')+"&gcda.rq="+$("input[name='rq']").val();
 		//alert(data);
 		$.ajax({
 				type:'post',
@@ -320,7 +320,7 @@
                                 </td>
                                 <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
                                     border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="3">
-                                 <input type="text" id="rq"  style="width: 300px;">
+                                 <input type="text" id="rq" name='rq' style="width: 300px;">
                                 </td>
                             </tr>
                             <tr style="height: 35px;">

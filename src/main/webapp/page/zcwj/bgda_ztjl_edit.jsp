@@ -111,7 +111,7 @@ $(function(){
 								src="${pageContext.request.contextPath}/images/Button/baocun1.gif" style="border-width: 0px;" />
 								&nbsp; 
 								<input type="image" name="btnCancel" id="btnCancel" onmouseover="this.src='${pageContext.request.contextPath}/images/Button/fanhui2.GIF'" alt="返回"
-								onclick="parent.$('#zjxd').window('destroy');" onmouseout="this.src='${pageContext.request.contextPath}/images/Button/fanhui1.GIF'"
+								onclick="fanhui()" onmouseout="this.src='${pageContext.request.contextPath}/images/Button/fanhui1.GIF'"
 								src="${pageContext.request.contextPath}/images/Button/fanhui1.GIF" style="border-width: 0px;" />
 							</td>
 						</tr>
@@ -121,6 +121,7 @@ $(function(){
 		<script type="text/javascript">
 		
 			function editzjqf(){
+				alert(1);
 				var gcdaZtjl={'gcdaZtjl.id':parent.obj2.id,'gcdaZtjl.daid':parent.obj2.daid,'gcdaZtjl.jcr':$('#jcr').val(),
 						'gcdaZtjl.jcsj':$("input[name='jcsj']").val(),'gcdaZtjl.jclxdh':$('#jclxdh').val(),
 						'gcdaZtjl.ghr':$('#ghr').val(),'gcdaZtjl.ghsj':$("input[name='ghsj']").val(),
@@ -137,6 +138,10 @@ $(function(){
 						parent.$('#gcda_ztjl_edit').window('destroy');
 					}
 				});
+			}
+			function fanhui(){
+				alert();
+				parent.$('#gcda_ztjl_edit').window('destroy');
 			}
 		</script>
 	</center>

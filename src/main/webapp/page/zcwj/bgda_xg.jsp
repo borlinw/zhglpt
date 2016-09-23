@@ -400,9 +400,9 @@
                                 </td>
                                 <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
                                     border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="1">
-                                   <input type="file" name="fileupload" id="fileupload" /><span style="font-size: x-small;vertical-align: 120%">(小于20M)</span>
+                                   <input type="file" name="fileupload" id="fileupload" /><span style="font-size: x-small;vertical-align: 60%">(小于20M)</span>
                                 </td>
-                                <td style="border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
+                                <td style="width:303px;border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; border-top: 1px none #C0C0C0;
                                     border-bottom: 1px solid #C0C0C0; text-align: left; padding-left: 10px;" colspan="2">
                                    <font id="message" color="red"></font>
                                 </td>

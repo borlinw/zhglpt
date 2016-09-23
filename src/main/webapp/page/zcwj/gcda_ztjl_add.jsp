@@ -24,7 +24,9 @@ $(function(){
 	$("#jcsj").datebox({    
 	});  
 	$("#ghsj").datebox({    
-	});  
+	});
+	$(".combo.datebox").css("width","100px");
+	$(".combo.datebox").find("input").css("width","77px");
 });
 </script>
 </head>

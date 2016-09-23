@@ -29,6 +29,9 @@
 		$("#jssj").datebox({    
 		});  
 		showAll();
+		$(".pagination-page-list").css("width","4em");
+		$(".combo.datebox").css("width","107px");
+		$(".combo.datebox").find("input").css("width","84px");
 	});
 	
 		
@@ -69,7 +72,7 @@
 			        {field:'rq',title:'日期',width:100,align:'center'},
 			        {field:'cs',title:'册数',width:50,align:'center'},
 			        {field:'cfwz',title:'存放位置',width:50,align:'center'},
-			        {field:'bz',title:'备注',width:200,align:'center'}
+			        {field:'bz',title:'备注',width:251,align:'center'}
 			    ]]    
 			}); 
 		}
@@ -88,7 +91,7 @@
 				title : '工程档案添加',
 				page : 'gcda_add.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=gcda.jsp'+'&id='+new Date().getTime(),
 				width : 570,
-				height : 340,
+				height : 530,
 				top : 0,
 				rang : true,
 				resize : false,
@@ -106,7 +109,7 @@
 				title : '工程档案编辑',
 				page : 'gcda_xg.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=gcda.jsp'+'&id='+data.id,
 				width : 570,
-				height : 340,
+				height : 530,
 				top : 0,
 				rang : true,
 				resize : false,
@@ -146,7 +149,7 @@
 				title : '工程档案编辑',
 				page : 'gcda_ck.jsp?url='+"/zhglpt/wjxt/uploadWjFile.do"+'&flag=gcda.jsp'+'&id='+data.id,
 				width : 570,
-				height : 340,
+				height : 530,
 				top : 0,
 				rang : true,
 				resize : false,
@@ -196,7 +199,7 @@ a:active {
         							<input type="text" id="kssj" >
         							<span>至</span>
         							<input type="text" id="jssj" >
-        							&nbsp;&nbsp;&nbsp;&nbsp;
+        							&nbsp;
 									 <span>项目名称：</span>
         							 <input class="combo-text validatebox-text" id="xmmc" style="width: 113px; height: 20px; line-height: 20px;" type="text">
         							 <span>档案名称：</span>

@@ -67,6 +67,8 @@
 			
 			showAll();
 			$(".pagination-page-list").css("width","4em");
+			$(".combo.datebox").css("width","107px");
+			$(".combo.datebox").find("input").css("width","84px");
 		});
 		
 		function showAll(){
@@ -82,7 +84,7 @@
 			    rownumbers:true,
 			    pageNumber:1,
 			    pageSize:10,
-			    fitColumns:true,
+			    fitColumns:false,
 			    height:$(window).height()-$(window).height()*0.22,
 			    width:$(window).width()-$(window).width()*0.02,
 			    queryParams: {
@@ -92,17 +94,17 @@
 			    	wjmc:wjmc
 				},
 			    columns:[[
-			        {field:'c',title:'操作',width:$(window).width()*0.1,align:'center',formatter:function(value,row,index){
+			        {field:'c',title:'操作',width:165,align:'center',formatter:function(value,row,index){
 			        	if($.cookie("unit").substr(0,row.fbdw.length)==row.fbdw)
 			        		//+'<a style="text-decoration:none;color:#3399CC;" href="#" onclick="editwj('+index+')">编辑</a>        '
 			        	return '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    '+'<a style="text-decoration:none;color:#3399CC;" href="#" onclick="deletewj('+index+')">删除</a>        ';
 			        	else	 return '<a style="text-decoration:none;color:#3399CC;" href="#" onclick="ckwj('+index+')">查看</a>    ';
 			        }},
-			        {field:'wjmc',title:'文件名称',width:$(window).width()*0.25,align:'center'},
-			        {field:'jsdw',title:'发布单位',width:$(window).width()*0.15,align:'center'},
-			        {field:'fbr',title:'发布人',width:$(window).width()*0.1,align:'center'},
-			        {field:'fbsj',title:'发布时间',width:$(window).width()*0.1,align:'center'},
-			        {field:'wjgy',title:'文件概要',width:$(window).width()*0.25,align:'center'}
+			        {field:'wjmc',title:'文件名称',width:265,align:'center'},
+			        {field:'jsdw',title:'发布单位',width:165,align:'center'},
+			        {field:'fbr',title:'发布人',width:111,align:'center'},
+			        {field:'fbsj',title:'发布时间',width:111,align:'center'},
+			        {field:'wjgy',title:'文件概要',width:283,align:'center'}
 			    ]]    
 			}); 
 		}
@@ -184,6 +186,7 @@ a:hover {
 a:active {
  text-decoration: none;
 }
+/*table.datagrid-htable tr td div.datagrid-cell {padding-right:25px;}*/
 -->
 </style>
 </head>

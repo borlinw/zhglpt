@@ -34,7 +34,7 @@
 		and truename like #{yhm}||'%'
 		</if>
 		<if test="unit != null and  unit != ''">
-		and unit like substr(rtrim(#{unit},'0'),0,4)||'_'||substr(rtrim(#{unit},'0'),6,length(rtrim(#{unit},'0')))||'%'
+		and unit like #{unit}||'%'
 		</if>
 		)  m
 			where <![CDATA[rownum<=(#{page} * #{rows})]]>
@@ -49,16 +49,16 @@
 		and truename like #{yhm}||'%'
 		</if>
 		<if test="unit != null and  unit != ''">
-		and unit like substr(rtrim(#{unit},'0'),0,4)||'_'||substr(rtrim(#{unit},'0'),6,length(rtrim(#{unit},'0')))||'%'
+		and unit like #{unit}||'%'
 		</if>
 	</select>
 	<select id="selQxList" parameterType="hashmap" resultType="hashmap">
 		select roleid,rolename from xtgl_role order by roleid
 	</select>
 	<insert id="insertYh" parameterType="master">
-		insert into xtgl_master (id,truename,password,tel,phone,unit,name,sex,roleid,czsj,idcard) 
+		insert into xtgl_master (id,truename,password,tel,phone,unit,name,sex,roleid,czsj) 
 		values (SYS_GUID(),#{truename},#{password}
-		,#{tel},#{phone},#{unit},#{name},#{sex},#{roleid},SYSDATE,#{idcard})
+		,#{tel},#{phone},#{unit},#{name},#{sex},#{roleid},SYSDATE)
 	</insert>
 	<update id="updatezt" parameterType="hashmap">
 		update master set zt=#{zt} where id=#{id}

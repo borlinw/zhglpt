@@ -95,12 +95,12 @@ function startSearch(){
 			title : '性别',
 			width : 100,
 			align : 'center'
-		},{
+		}/* ,{
 			field : 'idcard',
 			title : '身份证号',
 			width : 100,
 			align : 'center'
-		},{
+		} */,{
 			field : 'tel',
 			title : '电话',
 			width : 100,

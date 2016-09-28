@@ -83,36 +83,15 @@ function save(){
 		alert("联系电话的格式不正确！");
 		return false;
 	}
-	if($("#idcard").val()!='')
+	/* if($("#idcard").val()!='')
 	if(!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test($("#idcard").val())){
 	    alert("请输入正确的身份证号码！");
 	    return  false;
-	}
+	} */
     checkNameVal($("#truename").val());
 }
-function loadDist5(id) {
-	$('#' + id).combotree(
-	{
-		checkbox : true,
-		url : '/zhglpt/gcgl/selAllUnit1.do?yhdw=' + '36',
-		onSelect : function(node) {
-			YMLib.Var.DistName = node.text;
-		}
-	});
-	if($.cookie('unit')=='36'){
-		if($.cookie('truename')=='省局综规处')
-			$('#' + id).combotree('setValue', '21101360000');
-		else if($.cookie('truename')=='省局县乡处')
-			$('#' + id).combotree('setValue', '11101360000');
-		else
-		$('#' + id).combotree('setValue', '36');
-	}
-	else
-	$('#' + id).combotree('setValue', $.cookie('unit'));
-}
 $(function(){
-	
-	loadDist5("unit");
+	loadUnit("unit",$.cookie("unit"));
 	selQxList();
 	$("#yhgl_btn_Save").click(function(){
 		save();
@@ -167,14 +146,14 @@ $(function(){
 					<input id="_xb2" type="radio" name="master.sex" value="女" style="width:50px;"/><label for="_xb2">女</label>
 				</td>
 			</tr>
-			<tr>
+			<!-- <tr display="none">
 				<td align="right">
 					身份证号：
 				</td>
 				<td style="text-align: left">
-					<input id="idcard" name="master.idcard" type="text"/><!-- <span style="color:red;">必填项</span> -->
+					<input id="idcard" name="master.idcard" type="text"/><span style="color:red;">必填项</span>
 				</td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td align="right">
 					联系电话：

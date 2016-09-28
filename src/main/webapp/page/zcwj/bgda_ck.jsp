@@ -49,8 +49,8 @@
    	} 
 
 	function fanhui() {
-		//var flag=request('flag');
-		parent.window.location = '/zhglpt/page/zcwj/bgda.jsp';
+		var flag=request('flag');
+		parent.window.location = '/zhglpt/page/zcwj/'+flag;
  		dg.cancel();
 	}
 		$(function(){
